@@ -149,6 +149,26 @@ details.paused summary::-webkit-details-marker{display:none}
 .sbar .w{background:var(--green)}.sbar .rk{background:#F28B82}.sbar .bg{background:#FDD663}
 .slab{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;flex-wrap:wrap}
 .lose{color:var(--red);font-weight:500}
+h2[id],#qv{scroll-margin-top:120px}
+.toc{display:flex;gap:6px;flex-wrap:wrap;padding-top:4px}
+.toc button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--bg);color:var(--ink-2);border-radius:14px;padding:4px 11px;cursor:pointer}
+.toc button:hover{color:var(--blue);border-color:var(--blue)}
+.vg-det>summary{cursor:pointer;font-size:13px;color:var(--blue);padding:6px 2px;list-style-position:inside}
+.vg-det[open]>summary{margin-bottom:8px}
+.qv{padding:0}
+.qv .qstack{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:4px 18px 10px;background:var(--line-2)}
+.qv .qstack i{display:block;height:100%}
+.qrw{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(90px,1.2fr) repeat(4,minmax(70px,auto));gap:12px;align-items:center;padding:9px 18px;border-top:1px solid var(--line-2);font-size:13.5px}
+.qrw.hd{font-size:11.5px;color:var(--ink-2);font-weight:500;border-top:0;padding-block:4px}
+.qrw .r{text-align:right;white-space:nowrap}
+.qrw .nm{display:flex;gap:9px;align-items:center;min-width:0}
+.qrw .nm i{width:10px;height:10px;border-radius:3px;flex:none}
+.qrw .nm b{font-weight:500;display:block}.qrw .nm small{display:block;font-size:11.5px;color:var(--ink-2)}
+.qrw .qbar{display:block}.qrw .tr{display:block;height:8px;border-radius:4px;background:var(--line-2);overflow:hidden}.qrw .tr span{display:block;height:100%}
+.qrw.sub{padding-block:5px;font-size:12.5px;color:var(--ink-2);background:var(--page)}.qrw.sub .nm{padding-left:19px}
+.qrw.tot{font-weight:700}
+.qv .qnote{font-size:12px;color:var(--ink-2);padding:8px 18px 14px;border-top:1px solid var(--line-2);margin:0}
+@media (max-width:700px){.qrw{grid-template-columns:minmax(0,1fr) auto auto}.qrw .qbar,.qrw .c4,.qrw .c5{display:none}}
 .arow.tot{background:var(--page)}.arow.tot .nm b{font-weight:700}
 .arow.ln .nm b{font-weight:700}
 .arow.sub{padding-block:6px;font-size:13px}.arow.sub .nm b{font-weight:400;padding-left:16px;color:var(--ink-2)}
@@ -328,8 +348,9 @@ tr.subr td:first-child{padding-left:26px}
   <div class="warn" id="warn" hidden></div>
 
 
+  <nav class="toc" aria-label="Ir para"><button type="button" data-go="h-vg">Vendas</button><button type="button" data-go="qv">Quem vendeu</button><button type="button" data-go="h-roas">Retorno</button><button type="button" data-go="h-per">Anúncios</button><button type="button" data-go="h-camp">Campanhas</button><button type="button" data-go="h-auc">Leilão</button><button type="button" data-go="h-pl">Produtos</button><button type="button" data-go="h-crm">Atendimento</button><button type="button" data-go="h-prod">Buscas</button></nav>
   <section aria-labelledby="h-vg">
-    <div class="st"><h2 id="h-vg">Vendas gerais</h2><span class="h" id="vgHint"></span><span class="chip" id="vgChip"><i></i><span id="vgTxt">Bling</span></span></div>
+    <div class="st"><h2 id="h-vg">Vendas</h2><span class="h" id="vgHint"></span><span class="chip" id="vgChip"><i></i><span id="vgTxt">Bling</span></span></div>
     <div class="vg-ctl" role="group" aria-label="Filtrar vendas gerais">
       <div class="seg" id="vgBase" aria-label="Considerar frete"></div>
       <div class="seg wrap" id="vgCh"></div>
@@ -339,10 +360,12 @@ tr.subr td:first-child{padding-left:26px}
       <div class="card vg-main" id="vgMain"></div>
       <div class="card vg-goal" id="vgGoal"></div>
     </div>
+    <div class="card qv" id="qv"></div>
+    <details class="vg-det"><summary>Ver tabelas detalhadas · por canal e por vendedor (igual ao Bling)</summary>
     <div style="display:grid;gap:12px">
       <div class="card"><div class="ch"><h3>Por canal</h3><span class="h">site separado pelo que Google e Meta creditam</span></div><div class="tw"><table class="sm"><thead><tr><th>Canal</th><th>Pedidos</th><th>Valor produtos</th><th>Frete</th><th>Total venda</th><th>vs mês anterior</th><th>vs ano anterior</th></tr></thead><tbody id="vgChTb"></tbody></table></div></div>
       <div class="card"><div class="ch"><h3>Por vendedor</h3><span class="h">igual ao relatório do Bling</span></div><div class="tw"><table class="sm"><thead><tr><th>Vendedor</th><th>Pedidos</th><th>Valor</th><th>Frete</th><th>Total venda</th><th>Ticket médio</th></tr></thead><tbody id="vgVdTb"></tbody></table></div></div>
-    </div>
+    </div></details>
     <p class="note card">Fonte: pedidos de venda do Bling, sem cancelados, devolvidos e estornados (o relatório do Bling com "Situação: Todos" inclui esses). Sem frete = valor dos produtos (coluna Valor do Bling); com frete = Total Venda. A meta e as comparações seguem a opção escolhida. Comparações: mesmo intervalo de dias no mês anterior e no mesmo período do ano anterior. A divisão do site entre Google e Meta usa o valor que cada plataforma credita a si mesma; pode haver sobreposição e não soma exatamente o total. Vendedor vem de cada pedido; carrega junto com os produtos.</p>
   </section>
 
@@ -354,17 +377,8 @@ tr.subr td:first-child{padding-left:26px}
     <p class="note card">ROAS = vendas ÷ investimento em anúncios. Meta e Google usam as vendas que cada plataforma diz ter gerado (podem contar a mesma venda). "Tráfego", "Site", "WhatsApp" e "Tudo" usam vendas reais do Bling, sem cancelados, divididas pelo investimento escolhido acima (Google + Meta, só Google ou só Meta); nem toda venda veio de anúncio. Tráfego = site (Loja Integrada) + WhatsApp, sem Mercado Livre e outras lojas. WhatsApp pela planilha = vendas fechadas dos leads atendidos, sem as marcadas "finalizado no site" para não contar duas vezes (padrão, mais perto do que veio de anúncio); pelo Bling = tudo que as vendedoras faturaram, incluindo licitações, B2B e recompras. Frete segue a opção Sem frete / Com frete de Vendas gerais. Abaixo de cada número, a comparação com o período anterior escolhido no filtro.</p>
   </section>
 
-  <section class="hero" aria-labelledby="h-hoje">
-    <div class="st"><h2 id="h-hoje">Visão do período</h2><span class="h" id="hojeHint"></span></div>
-    <div class="kpis" id="kHoje" hidden></div>
-    <div class="card goal" id="goal"></div>
-    <div class="card auc" id="auc"></div>
-    <div class="card sales-today" id="salesToday"></div>
-  </section>
-
-
   <section aria-labelledby="h-per">
-    <div class="st"><h2 id="h-per">Resultado do período</h2><span class="h" id="perHint"></span></div>
+    <div class="st"><h2 id="h-per">Anúncios no período</h2><span class="h" id="perHint"></span></div>
     <div class="kpis k7" id="kPer"></div>
     <div class="card chart">
       <div class="chart-h"><h3>Investimento e vendas por dia</h3>
@@ -372,6 +386,14 @@ tr.subr td:first-child{padding-left:26px}
       <div class="cw"><svg id="chart" viewBox="0 0 760 240" width="100%" role="img" aria-label="Investimento diário de Google e Meta e vendas por dia no período"></svg></div>
     </div>
   </section>
+
+  <section class="hero" aria-labelledby="h-hoje">
+    <div class="st"><h2 id="h-hoje">Vendas que os anúncios trouxeram</h2><span class="h" id="hojeHint"></span></div>
+    <div class="kpis" id="kHoje" hidden></div>
+    <div class="card goal" id="goal"></div>
+    <div class="card sales-today" id="salesToday"></div>
+  </section>
+
 
   <section aria-labelledby="h-camp">
     <div class="st"><h2 id="h-camp">Campanhas no período</h2><span class="h">Da que mais investe para a que menos investe</span></div>
@@ -393,6 +415,11 @@ tr.subr td:first-child{padding-left:26px}
   </section>
 
 
+
+  <section aria-labelledby="h-auc">
+    <div class="st"><h2 id="h-auc">Leilão do Google</h2><span class="h">onde perdemos espaço para concorrentes</span></div>
+    <div class="card auc" id="auc"></div>
+  </section>
 
   <section aria-labelledby="h-pl">
     <div class="st"><h2 id="h-pl">Linhas de produto e categorias</h2><span class="h" id="plHint"></span></div>
@@ -631,6 +658,26 @@ details.paused summary::-webkit-details-marker{display:none}
 .sbar .w{background:var(--green)}.sbar .rk{background:#F28B82}.sbar .bg{background:#FDD663}
 .slab{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;flex-wrap:wrap}
 .lose{color:var(--red);font-weight:500}
+h2[id],#qv{scroll-margin-top:120px}
+.toc{display:flex;gap:6px;flex-wrap:wrap;padding-top:4px}
+.toc button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--bg);color:var(--ink-2);border-radius:14px;padding:4px 11px;cursor:pointer}
+.toc button:hover{color:var(--blue);border-color:var(--blue)}
+.vg-det>summary{cursor:pointer;font-size:13px;color:var(--blue);padding:6px 2px;list-style-position:inside}
+.vg-det[open]>summary{margin-bottom:8px}
+.qv{padding:0}
+.qv .qstack{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:4px 18px 10px;background:var(--line-2)}
+.qv .qstack i{display:block;height:100%}
+.qrw{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(90px,1.2fr) repeat(4,minmax(70px,auto));gap:12px;align-items:center;padding:9px 18px;border-top:1px solid var(--line-2);font-size:13.5px}
+.qrw.hd{font-size:11.5px;color:var(--ink-2);font-weight:500;border-top:0;padding-block:4px}
+.qrw .r{text-align:right;white-space:nowrap}
+.qrw .nm{display:flex;gap:9px;align-items:center;min-width:0}
+.qrw .nm i{width:10px;height:10px;border-radius:3px;flex:none}
+.qrw .nm b{font-weight:500;display:block}.qrw .nm small{display:block;font-size:11.5px;color:var(--ink-2)}
+.qrw .qbar{display:block}.qrw .tr{display:block;height:8px;border-radius:4px;background:var(--line-2);overflow:hidden}.qrw .tr span{display:block;height:100%}
+.qrw.sub{padding-block:5px;font-size:12.5px;color:var(--ink-2);background:var(--page)}.qrw.sub .nm{padding-left:19px}
+.qrw.tot{font-weight:700}
+.qv .qnote{font-size:12px;color:var(--ink-2);padding:8px 18px 14px;border-top:1px solid var(--line-2);margin:0}
+@media (max-width:700px){.qrw{grid-template-columns:minmax(0,1fr) auto auto}.qrw .qbar,.qrw .c4,.qrw .c5{display:none}}
 .arow.tot{background:var(--page)}.arow.tot .nm b{font-weight:700}
 .arow.ln .nm b{font-weight:700}
 .arow.sub{padding-block:6px;font-size:13px}.arow.sub .nm b{font-weight:400;padding-left:16px;color:var(--ink-2)}
@@ -810,8 +857,9 @@ tr.subr td:first-child{padding-left:26px}
   <div class="warn" id="warn" hidden></div>
 
 
+  <nav class="toc" aria-label="Ir para"><button type="button" data-go="h-vg">Vendas</button><button type="button" data-go="qv">Quem vendeu</button><button type="button" data-go="h-roas">Retorno</button><button type="button" data-go="h-per">Anúncios</button><button type="button" data-go="h-camp">Campanhas</button><button type="button" data-go="h-auc">Leilão</button><button type="button" data-go="h-pl">Produtos</button><button type="button" data-go="h-crm">Atendimento</button><button type="button" data-go="h-prod">Buscas</button></nav>
   <section aria-labelledby="h-vg">
-    <div class="st"><h2 id="h-vg">Vendas gerais</h2><span class="h" id="vgHint"></span><span class="chip" id="vgChip"><i></i><span id="vgTxt">Bling</span></span></div>
+    <div class="st"><h2 id="h-vg">Vendas</h2><span class="h" id="vgHint"></span><span class="chip" id="vgChip"><i></i><span id="vgTxt">Bling</span></span></div>
     <div class="vg-ctl" role="group" aria-label="Filtrar vendas gerais">
       <div class="seg" id="vgBase" aria-label="Considerar frete"></div>
       <div class="seg wrap" id="vgCh"></div>
@@ -821,10 +869,12 @@ tr.subr td:first-child{padding-left:26px}
       <div class="card vg-main" id="vgMain"></div>
       <div class="card vg-goal" id="vgGoal"></div>
     </div>
+    <div class="card qv" id="qv"></div>
+    <details class="vg-det"><summary>Ver tabelas detalhadas · por canal e por vendedor (igual ao Bling)</summary>
     <div style="display:grid;gap:12px">
       <div class="card"><div class="ch"><h3>Por canal</h3><span class="h">site separado pelo que Google e Meta creditam</span></div><div class="tw"><table class="sm"><thead><tr><th>Canal</th><th>Pedidos</th><th>Valor produtos</th><th>Frete</th><th>Total venda</th><th>vs mês anterior</th><th>vs ano anterior</th></tr></thead><tbody id="vgChTb"></tbody></table></div></div>
       <div class="card"><div class="ch"><h3>Por vendedor</h3><span class="h">igual ao relatório do Bling</span></div><div class="tw"><table class="sm"><thead><tr><th>Vendedor</th><th>Pedidos</th><th>Valor</th><th>Frete</th><th>Total venda</th><th>Ticket médio</th></tr></thead><tbody id="vgVdTb"></tbody></table></div></div>
-    </div>
+    </div></details>
     <p class="note card">Fonte: pedidos de venda do Bling, sem cancelados, devolvidos e estornados (o relatório do Bling com "Situação: Todos" inclui esses). Sem frete = valor dos produtos (coluna Valor do Bling); com frete = Total Venda. A meta e as comparações seguem a opção escolhida. Comparações: mesmo intervalo de dias no mês anterior e no mesmo período do ano anterior. A divisão do site entre Google e Meta usa o valor que cada plataforma credita a si mesma; pode haver sobreposição e não soma exatamente o total. Vendedor vem de cada pedido; carrega junto com os produtos.</p>
   </section>
 
@@ -836,17 +886,8 @@ tr.subr td:first-child{padding-left:26px}
     <p class="note card">ROAS = vendas ÷ investimento em anúncios. Meta e Google usam as vendas que cada plataforma diz ter gerado (podem contar a mesma venda). "Tráfego", "Site", "WhatsApp" e "Tudo" usam vendas reais do Bling, sem cancelados, divididas pelo investimento escolhido acima (Google + Meta, só Google ou só Meta); nem toda venda veio de anúncio. Tráfego = site (Loja Integrada) + WhatsApp, sem Mercado Livre e outras lojas. WhatsApp pela planilha = vendas fechadas dos leads atendidos, sem as marcadas "finalizado no site" para não contar duas vezes (padrão, mais perto do que veio de anúncio); pelo Bling = tudo que as vendedoras faturaram, incluindo licitações, B2B e recompras. Frete segue a opção Sem frete / Com frete de Vendas gerais. Abaixo de cada número, a comparação com o período anterior escolhido no filtro.</p>
   </section>
 
-  <section class="hero" aria-labelledby="h-hoje">
-    <div class="st"><h2 id="h-hoje">Visão do período</h2><span class="h" id="hojeHint"></span></div>
-    <div class="kpis" id="kHoje" hidden></div>
-    <div class="card goal" id="goal"></div>
-    <div class="card auc" id="auc"></div>
-    <div class="card sales-today" id="salesToday"></div>
-  </section>
-
-
   <section aria-labelledby="h-per">
-    <div class="st"><h2 id="h-per">Resultado do período</h2><span class="h" id="perHint"></span></div>
+    <div class="st"><h2 id="h-per">Anúncios no período</h2><span class="h" id="perHint"></span></div>
     <div class="kpis k7" id="kPer"></div>
     <div class="card chart">
       <div class="chart-h"><h3>Investimento e vendas por dia</h3>
@@ -854,6 +895,14 @@ tr.subr td:first-child{padding-left:26px}
       <div class="cw"><svg id="chart" viewBox="0 0 760 240" width="100%" role="img" aria-label="Investimento diário de Google e Meta e vendas por dia no período"></svg></div>
     </div>
   </section>
+
+  <section class="hero" aria-labelledby="h-hoje">
+    <div class="st"><h2 id="h-hoje">Vendas que os anúncios trouxeram</h2><span class="h" id="hojeHint"></span></div>
+    <div class="kpis" id="kHoje" hidden></div>
+    <div class="card goal" id="goal"></div>
+    <div class="card sales-today" id="salesToday"></div>
+  </section>
+
 
   <section aria-labelledby="h-camp">
     <div class="st"><h2 id="h-camp">Campanhas no período</h2><span class="h">Da que mais investe para a que menos investe</span></div>
@@ -875,6 +924,11 @@ tr.subr td:first-child{padding-left:26px}
   </section>
 
 
+
+  <section aria-labelledby="h-auc">
+    <div class="st"><h2 id="h-auc">Leilão do Google</h2><span class="h">onde perdemos espaço para concorrentes</span></div>
+    <div class="card auc" id="auc"></div>
+  </section>
 
   <section aria-labelledby="h-pl">
     <div class="st"><h2 id="h-pl">Linhas de produto e categorias</h2><span class="h" id="plHint"></span></div>
@@ -1247,6 +1301,7 @@ function renderLists(){
   var Tm=Object.keys(bt).map(function(k){return[TM.terms[+k],bt[k]]}).sort(function(a,b){return b[1][0]-a[1][0]}).slice(0,12),mt=Tm.length?Tm[0][1][0]:1;
   document.getElementById("termList").innerHTML=Tm.map(function(x,i){return '<div class="li"><span class="r">'+(i+1)+'</span><span class="nm"><b>'+esc(x[0])+'</b><span class="track"><span style="width:'+(x[1][0]/mt*100).toFixed(1)+'%;background:var(--teal)"></span></span></span><span class="mx"><b>'+n0(x[1][0])+'</b> buscas<br>'+n0(x[1][1])+' cliques</span></div>';}).join("")||'<p class="empty">Sem termos no período.</p>';
 }
+document.addEventListener("click",function(e){var b=e.target.closest(".toc button");if(!b)return;var el=document.getElementById(b.getAttribute("data-go"));if(el)el.scrollIntoView({behavior:"smooth",block:"start"});});
 function renderAll(){renderHoje();renderPeriod();renderAuc();renderLists();}
 
 function parseCRM(s){
@@ -1581,6 +1636,32 @@ function vgSum(A,B,byCh){var o={n:0,v:0,t:0,ch:{},vd:{},vdMiss:0};
 function covered(A,B){return Object.keys(BL.lists).some(function(k){var p=k.split("|");return p[0]<=A&&p[1]>=B;});}
 function pctTxt(cur,prev){if(!prev)return cur?"novo":"—";var p=(cur-prev)/prev*100;return(p>0?"▲ ":p<0?"▼ ":"")+N0.format(Math.abs(Math.round(p)))+"%";}
 function pctCls(cur,prev){if(!prev)return"";return cur>=prev?"up":"down";}
+function renderQV(){
+  var el=document.getElementById("qv");if(!el)return;var R=range(),A=iso(R.a),B=iso(R.b),X=vgRanges(),K=VG.base==="v"?"v":"t";
+  var hd='<div class="ch"><h3>Quem vendeu</h3><span class="h">'+fmtRange(R.a,R.b)+' · '+(K==="v"?"sem frete":"com frete")+' · todas as vendas do Bling, sem filtro de canal</span></div>';
+  if(!covered(A,B)){el.innerHTML=hd+'<p class="qnote">'+(MCP?"Lendo pedidos do Bling…":"Sem vendas do Bling para este período no link.")+'</p>';return;}
+  function sum(a,b){var o={};Object.keys(BL.o).forEach(function(id){var r=BL.o[id];if(r[0]<a||r[0]>b||BEXC[r[2]])return;var ch=String(r[1]);if(!CHN[ch])ch="203420937";var vk=vdKey(id);
+    var k=(vk&&vk!=="0")?"v"+vk:"c"+ch,x=o[k]||(o[k]={n:0,v:0,t:0});x.n++;x.v+=r[4]==null?r[3]:r[4];x.t+=r[3];});return o;}
+  var c=sum(A,B),hasPm=covered(X[0][0],X[0][1]),pm=hasPm?sum(X[0][0],X[0][1]):{};
+  var INFO={"v15596232945":["Bianca","vendedora · WhatsApp","#188038"],"v8872695510":["Natasha","vendedora · WhatsApp","#34A853"],"v15596569998":["Aline","vendedora · WhatsApp","#81C995"],"vx":["Outros vendedores","vendedor no Bling","#B7E1C1"],
+    "c0":["WhatsApp sem vendedora","pedido manual sem vendedor","#CEEAD6"],"c203398070":["Site (Loja Integrada)","compra direto no site","#1A73E8"],"c206320079":["Mercado Livre","marketplace","#F9AB00"],"c203420937":["Outras lojas","outros canais do Bling","#9AA0A6"]};
+  var tot=0,tn=0;Object.keys(c).forEach(function(k){tot+=c[k][K];tn+=c[k].n;});
+  var ks=Object.keys(c).sort(function(a,b){return c[b][K]-c[a][K]});
+  var stack='<div class="qstack" role="img" aria-label="Divisão das vendas">'+ks.map(function(k){var f=INFO[k]||[k,"","#ccc"];return '<i title="'+esc(f[0])+'" style="width:'+(tot?c[k][K]/tot*100:0).toFixed(2)+'%;background:'+f[2]+'"></i>';}).join("")+'</div>';
+  var h='<div class="qrw hd"><span>Quem</span><span class="qbar">Parte das vendas</span><span class="r">Vendas</span><span class="r">Pedidos</span><span class="r c4">Ticket médio</span><span class="r c5">vs mês anterior</span></div>';
+  var by=agg(R.a,R.b),G=totals(by,"g")[3],M=totals(by,"m")[3];
+  ks.forEach(function(k){var x=c[k],f=INFO[k]||[k,"","#ccc"],sh=tot?x[K]/tot:0,p=pm[k]?pm[k][K]:0;
+    h+='<div class="qrw"><span class="nm"><i style="background:'+f[2]+'"></i><span><b>'+esc(f[0])+'</b><small>'+esc(f[1])+'</small></span></span>'+
+      '<span class="qbar"><span class="tr"><span style="width:'+(sh*100).toFixed(1)+'%;background:'+f[2]+'"></span></span></span>'+
+      '<span class="r"><b>'+r0(x[K])+'</b><br><small style="color:var(--ink-2)">'+N0.format(Math.round(sh*100))+'% do total</small></span><span class="r">'+n0(x.n)+'</span><span class="r c4">'+r0(x[K]/Math.max(1,x.n))+'</span>'+
+      '<span class="r c5"><span class="delta '+(hasPm?pctCls(x[K],p):"")+'">'+(hasPm?pctTxt(x[K],p):"…")+'</span></span></div>';
+    if(k==="c203398070"&&x.v){var g=Math.min(G,x.v),m=Math.min(M,Math.max(0,x.v-g));
+      [["anúncios do Google (o que o Google credita)",g],["anúncios da Meta (o que a Meta credita)",m],["sem anúncio creditado (orgânico, direto)",Math.max(0,x.v-g-m)]].forEach(function(s){
+        h+='<div class="qrw sub"><span class="nm">↳ '+s[0]+'</span><span class="qbar"></span><span class="r">'+r0(s[1])+'</span><span class="r"></span><span class="r c4"></span><span class="r c5">'+N0.format(Math.round(s[1]/x.v*100))+'% do site</span></div>';});}});
+  var ptot=0;Object.keys(pm).forEach(function(k){ptot+=pm[k][K]});
+  h+='<div class="qrw tot"><span class="nm"><span><b>Total</b></span></span><span class="qbar"></span><span class="r">'+r0(tot)+'</span><span class="r">'+n0(tn)+'</span><span class="r c4">'+r0(tot/Math.max(1,tn))+'</span><span class="r c5"><span class="delta '+(hasPm?pctCls(tot,ptot):"")+'">'+(hasPm?pctTxt(tot,ptot):"…")+'</span></span></div>';
+  el.innerHTML=hd+stack+h+'<p class="qnote">Vendedora = vendedor marcado no pedido do Bling (inclui licitações e B2B fechados por ela). Site dividido pelo que Google e Meta creditam a si mesmos; pode haver sobreposição, por isso a soma é limitada ao valor do site. Comparação: mesmos dias do mês anterior.</p>';
+}
 function renderVG(){
   var R=range(),A=iso(R.a),B=iso(R.b),X=vgRanges(),has=covered(A,B);
   document.getElementById("vgHint").textContent=fmtRange(R.a,R.b)+" · todos os canais do Bling";
@@ -1616,6 +1697,7 @@ function renderVG(){
   /* vendedores */
   var vr=Object.keys(c.vd).map(function(k){return[k,c.vd[k]]}).sort(function(a,b){return b[1].t-a[1].t});
   document.getElementById("vgVdTb").innerHTML=has?(vr.map(function(x){var v=x[1],nm=x[0]==="?"?"Carregando…":x[0]==="0"?"Sem vendedor (lojas)":x[0]==="x"?"Outros":VDN[x[0]];return '<tr><td>'+esc(nm)+'</td><td>'+n0(v.n)+'</td><td>'+r0(v.v)+'</td><td>'+r0(v.t-v.v)+'</td><td><b>'+r0(v.t)+'</b></td><td>'+(v.n?r0(v.t/v.n):"–")+'</td></tr>';}).join("")||'<tr class="emptyrow"><td colspan="6">Sem pedidos no período.</td></tr>'):'<tr class="emptyrow"><td colspan="6">…</td></tr>';
+  try{renderQV()}catch(e){}
   var ok=has&&hasPm&&hasPy;document.getElementById("vgChip").className="chip "+(ok?"live":MCP?"stale":"");document.getElementById("vgTxt").textContent=ok?"Bling ao vivo":MCP?"Bling carregando":"Bling: só com a conta conectada";
 }
 document.getElementById("vgCh").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var k=b.getAttribute("data-v");VG.ch[k]=!VG.ch[k];try{localStorage.setItem("mc-vg",JSON.stringify(VG))}catch(_){}renderVG();});
@@ -2076,6 +2158,7 @@ function renderLists(){
   var Tm=Object.keys(bt).map(function(k){return[TM.terms[+k],bt[k]]}).sort(function(a,b){return b[1][0]-a[1][0]}).slice(0,12),mt=Tm.length?Tm[0][1][0]:1;
   document.getElementById("termList").innerHTML=Tm.map(function(x,i){return '<div class="li"><span class="r">'+(i+1)+'</span><span class="nm"><b>'+esc(x[0])+'</b><span class="track"><span style="width:'+(x[1][0]/mt*100).toFixed(1)+'%;background:var(--teal)"></span></span></span><span class="mx"><b>'+n0(x[1][0])+'</b> buscas<br>'+n0(x[1][1])+' cliques</span></div>';}).join("")||'<p class="empty">Sem termos no período.</p>';
 }
+document.addEventListener("click",function(e){var b=e.target.closest(".toc button");if(!b)return;var el=document.getElementById(b.getAttribute("data-go"));if(el)el.scrollIntoView({behavior:"smooth",block:"start"});});
 function renderAll(){renderHoje();renderPeriod();renderAuc();renderLists();}
 
 function parseCRM(s){
@@ -2410,6 +2493,32 @@ function vgSum(A,B,byCh){var o={n:0,v:0,t:0,ch:{},vd:{},vdMiss:0};
 function covered(A,B){return Object.keys(BL.lists).some(function(k){var p=k.split("|");return p[0]<=A&&p[1]>=B;});}
 function pctTxt(cur,prev){if(!prev)return cur?"novo":"—";var p=(cur-prev)/prev*100;return(p>0?"▲ ":p<0?"▼ ":"")+N0.format(Math.abs(Math.round(p)))+"%";}
 function pctCls(cur,prev){if(!prev)return"";return cur>=prev?"up":"down";}
+function renderQV(){
+  var el=document.getElementById("qv");if(!el)return;var R=range(),A=iso(R.a),B=iso(R.b),X=vgRanges(),K=VG.base==="v"?"v":"t";
+  var hd='<div class="ch"><h3>Quem vendeu</h3><span class="h">'+fmtRange(R.a,R.b)+' · '+(K==="v"?"sem frete":"com frete")+' · todas as vendas do Bling, sem filtro de canal</span></div>';
+  if(!covered(A,B)){el.innerHTML=hd+'<p class="qnote">'+(MCP?"Lendo pedidos do Bling…":"Sem vendas do Bling para este período no link.")+'</p>';return;}
+  function sum(a,b){var o={};Object.keys(BL.o).forEach(function(id){var r=BL.o[id];if(r[0]<a||r[0]>b||BEXC[r[2]])return;var ch=String(r[1]);if(!CHN[ch])ch="203420937";var vk=vdKey(id);
+    var k=(vk&&vk!=="0")?"v"+vk:"c"+ch,x=o[k]||(o[k]={n:0,v:0,t:0});x.n++;x.v+=r[4]==null?r[3]:r[4];x.t+=r[3];});return o;}
+  var c=sum(A,B),hasPm=covered(X[0][0],X[0][1]),pm=hasPm?sum(X[0][0],X[0][1]):{};
+  var INFO={"v15596232945":["Bianca","vendedora · WhatsApp","#188038"],"v8872695510":["Natasha","vendedora · WhatsApp","#34A853"],"v15596569998":["Aline","vendedora · WhatsApp","#81C995"],"vx":["Outros vendedores","vendedor no Bling","#B7E1C1"],
+    "c0":["WhatsApp sem vendedora","pedido manual sem vendedor","#CEEAD6"],"c203398070":["Site (Loja Integrada)","compra direto no site","#1A73E8"],"c206320079":["Mercado Livre","marketplace","#F9AB00"],"c203420937":["Outras lojas","outros canais do Bling","#9AA0A6"]};
+  var tot=0,tn=0;Object.keys(c).forEach(function(k){tot+=c[k][K];tn+=c[k].n;});
+  var ks=Object.keys(c).sort(function(a,b){return c[b][K]-c[a][K]});
+  var stack='<div class="qstack" role="img" aria-label="Divisão das vendas">'+ks.map(function(k){var f=INFO[k]||[k,"","#ccc"];return '<i title="'+esc(f[0])+'" style="width:'+(tot?c[k][K]/tot*100:0).toFixed(2)+'%;background:'+f[2]+'"></i>';}).join("")+'</div>';
+  var h='<div class="qrw hd"><span>Quem</span><span class="qbar">Parte das vendas</span><span class="r">Vendas</span><span class="r">Pedidos</span><span class="r c4">Ticket médio</span><span class="r c5">vs mês anterior</span></div>';
+  var by=agg(R.a,R.b),G=totals(by,"g")[3],M=totals(by,"m")[3];
+  ks.forEach(function(k){var x=c[k],f=INFO[k]||[k,"","#ccc"],sh=tot?x[K]/tot:0,p=pm[k]?pm[k][K]:0;
+    h+='<div class="qrw"><span class="nm"><i style="background:'+f[2]+'"></i><span><b>'+esc(f[0])+'</b><small>'+esc(f[1])+'</small></span></span>'+
+      '<span class="qbar"><span class="tr"><span style="width:'+(sh*100).toFixed(1)+'%;background:'+f[2]+'"></span></span></span>'+
+      '<span class="r"><b>'+r0(x[K])+'</b><br><small style="color:var(--ink-2)">'+N0.format(Math.round(sh*100))+'% do total</small></span><span class="r">'+n0(x.n)+'</span><span class="r c4">'+r0(x[K]/Math.max(1,x.n))+'</span>'+
+      '<span class="r c5"><span class="delta '+(hasPm?pctCls(x[K],p):"")+'">'+(hasPm?pctTxt(x[K],p):"…")+'</span></span></div>';
+    if(k==="c203398070"&&x.v){var g=Math.min(G,x.v),m=Math.min(M,Math.max(0,x.v-g));
+      [["anúncios do Google (o que o Google credita)",g],["anúncios da Meta (o que a Meta credita)",m],["sem anúncio creditado (orgânico, direto)",Math.max(0,x.v-g-m)]].forEach(function(s){
+        h+='<div class="qrw sub"><span class="nm">↳ '+s[0]+'</span><span class="qbar"></span><span class="r">'+r0(s[1])+'</span><span class="r"></span><span class="r c4"></span><span class="r c5">'+N0.format(Math.round(s[1]/x.v*100))+'% do site</span></div>';});}});
+  var ptot=0;Object.keys(pm).forEach(function(k){ptot+=pm[k][K]});
+  h+='<div class="qrw tot"><span class="nm"><span><b>Total</b></span></span><span class="qbar"></span><span class="r">'+r0(tot)+'</span><span class="r">'+n0(tn)+'</span><span class="r c4">'+r0(tot/Math.max(1,tn))+'</span><span class="r c5"><span class="delta '+(hasPm?pctCls(tot,ptot):"")+'">'+(hasPm?pctTxt(tot,ptot):"…")+'</span></span></div>';
+  el.innerHTML=hd+stack+h+'<p class="qnote">Vendedora = vendedor marcado no pedido do Bling (inclui licitações e B2B fechados por ela). Site dividido pelo que Google e Meta creditam a si mesmos; pode haver sobreposição, por isso a soma é limitada ao valor do site. Comparação: mesmos dias do mês anterior.</p>';
+}
 function renderVG(){
   var R=range(),A=iso(R.a),B=iso(R.b),X=vgRanges(),has=covered(A,B);
   document.getElementById("vgHint").textContent=fmtRange(R.a,R.b)+" · todos os canais do Bling";
@@ -2445,6 +2554,7 @@ function renderVG(){
   /* vendedores */
   var vr=Object.keys(c.vd).map(function(k){return[k,c.vd[k]]}).sort(function(a,b){return b[1].t-a[1].t});
   document.getElementById("vgVdTb").innerHTML=has?(vr.map(function(x){var v=x[1],nm=x[0]==="?"?"Carregando…":x[0]==="0"?"Sem vendedor (lojas)":x[0]==="x"?"Outros":VDN[x[0]];return '<tr><td>'+esc(nm)+'</td><td>'+n0(v.n)+'</td><td>'+r0(v.v)+'</td><td>'+r0(v.t-v.v)+'</td><td><b>'+r0(v.t)+'</b></td><td>'+(v.n?r0(v.t/v.n):"–")+'</td></tr>';}).join("")||'<tr class="emptyrow"><td colspan="6">Sem pedidos no período.</td></tr>'):'<tr class="emptyrow"><td colspan="6">…</td></tr>';
+  try{renderQV()}catch(e){}
   var ok=has&&hasPm&&hasPy;document.getElementById("vgChip").className="chip "+(ok?"live":MCP?"stale":"");document.getElementById("vgTxt").textContent=ok?"Bling ao vivo":MCP?"Bling carregando":"Bling: só com a conta conectada";
 }
 document.getElementById("vgCh").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var k=b.getAttribute("data-v");VG.ch[k]=!VG.ch[k];try{localStorage.setItem("mc-vg",JSON.stringify(VG))}catch(_){}renderVG();});
