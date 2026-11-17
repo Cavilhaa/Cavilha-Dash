@@ -167,6 +167,7 @@ h2[id],#qv{scroll-margin-top:120px}
 .qrw .qbar{display:block}.qrw .tr{display:block;height:8px;border-radius:4px;background:var(--line-2);overflow:hidden}.qrw .tr span{display:block;height:100%}
 .qrw.sub{padding-block:5px;font-size:12.5px;color:var(--ink-2);background:var(--page)}.qrw.sub .nm{padding-left:19px}
 .qrw.tot{font-weight:700}
+.qdet>summary{cursor:pointer;font-size:12.5px;color:var(--blue);padding:8px 18px;border-top:1px solid var(--line-2)}
 .qv .qnote{font-size:12px;color:var(--ink-2);padding:8px 18px 14px;border-top:1px solid var(--line-2);margin:0}
 @media (max-width:700px){.qrw{grid-template-columns:minmax(0,1fr) auto auto}.qrw .qbar,.qrw .c4,.qrw .c5{display:none}}
 .arow.tot{background:var(--page)}.arow.tot .nm b{font-weight:700}
@@ -676,6 +677,7 @@ h2[id],#qv{scroll-margin-top:120px}
 .qrw .qbar{display:block}.qrw .tr{display:block;height:8px;border-radius:4px;background:var(--line-2);overflow:hidden}.qrw .tr span{display:block;height:100%}
 .qrw.sub{padding-block:5px;font-size:12.5px;color:var(--ink-2);background:var(--page)}.qrw.sub .nm{padding-left:19px}
 .qrw.tot{font-weight:700}
+.qdet>summary{cursor:pointer;font-size:12.5px;color:var(--blue);padding:8px 18px;border-top:1px solid var(--line-2)}
 .qv .qnote{font-size:12px;color:var(--ink-2);padding:8px 18px 14px;border-top:1px solid var(--line-2);margin:0}
 @media (max-width:700px){.qrw{grid-template-columns:minmax(0,1fr) auto auto}.qrw .qbar,.qrw .c4,.qrw .c5{display:none}}
 .arow.tot{background:var(--page)}.arow.tot .nm b{font-weight:700}
@@ -1636,6 +1638,13 @@ function vgSum(A,B,byCh){var o={n:0,v:0,t:0,ch:{},vd:{},vdMiss:0};
 function covered(A,B){return Object.keys(BL.lists).some(function(k){var p=k.split("|");return p[0]<=A&&p[1]>=B;});}
 function pctTxt(cur,prev){if(!prev)return cur?"novo":"—";var p=(cur-prev)/prev*100;return(p>0?"▲ ":p<0?"▼ ":"")+N0.format(Math.abs(Math.round(p)))+"%";}
 function pctCls(cur,prev){if(!prev)return"";return cur>=prev?"up":"down";}
+function siteAttr(A,B){
+  var A1=iso(idx(A)-1),B1=iso(idx(B)+1),byDay={},out=[];
+  Object.keys(BL.o).forEach(function(id){var r=BL.o[id];if(String(r[1])!=="203398070"||BEXC[r[2]]||r[0]<A1||r[0]>B1)return;var o={id:id,day:r[0],t:r[3],v:r[4]==null?r[3]:r[4],c:[]};(byDay[r[0]]||(byDay[r[0]]=[])).push(o);if(r[0]>=A&&r[0]<=B)out.push(o);});
+  function combo(arr,n,V){var res=null;(function go(st,pick,sumT,sumV){if(res)return;if(pick.length&&(Math.abs(sumT-V)<1.5||Math.abs(sumV-V)<1.5)){res=pick.slice();return;}if(pick.length>=n)return;for(var i=st;i<arr.length;i++){pick.push(arr[i]);go(i+1,pick,sumT+arr[i].t,sumV+arr[i].v);pick.pop();}})(0,[],0,0);return res;}
+  H.rows.slice().sort(function(a,b){return a[4]-b[4]}).forEach(function(r){if(!(r[4]>0)||!(r[5]>0))return;var d=iso(r[1]);if(d<A1||d>B1)return;var cm=H.camps[r[0]],nm=NICE[cm[0]]||cm[2];
+    [d,iso(r[1]-1),iso(r[1]+1)].some(function(dd){var arr=byDay[dd];if(!arr)return false;var f=combo(arr,Math.min(Math.round(r[4]),3),r[5]);if(!f)return false;f.forEach(function(o){if(!o.c.some(function(c){return c[0]===nm}))o.c.push([nm,cm[1]]);});return true;});});
+  return out;}
 function renderQV(){
   var el=document.getElementById("qv");if(!el)return;var R=range(),A=iso(R.a),B=iso(R.b),X=vgRanges(),K=VG.base==="v"?"v":"t";
   var hd='<div class="ch"><h3>Quem vendeu</h3><span class="h">'+fmtRange(R.a,R.b)+' · '+(K==="v"?"sem frete":"com frete")+' · todas as vendas do Bling, sem filtro de canal</span></div>';
@@ -1655,12 +1664,18 @@ function renderQV(){
       '<span class="qbar"><span class="tr"><span style="width:'+(sh*100).toFixed(1)+'%;background:'+f[2]+'"></span></span></span>'+
       '<span class="r"><b>'+r0(x[K])+'</b><br><small style="color:var(--ink-2)">'+N0.format(Math.round(sh*100))+'% do total</small></span><span class="r">'+n0(x.n)+'</span><span class="r c4">'+r0(x[K]/Math.max(1,x.n))+'</span>'+
       '<span class="r c5"><span class="delta '+(hasPm?pctCls(x[K],p):"")+'">'+(hasPm?pctTxt(x[K],p):"…")+'</span></span></div>';
-    if(k==="c203398070"&&x.v){var g=Math.min(G,x.v),m=Math.min(M,Math.max(0,x.v-g));
-      [["anúncios do Google (o que o Google credita)",g],["anúncios da Meta (o que a Meta credita)",m],["sem anúncio creditado (orgânico, direto)",Math.max(0,x.v-g-m)]].forEach(function(s){
-        h+='<div class="qrw sub"><span class="nm">↳ '+s[0]+'</span><span class="qbar"></span><span class="r">'+r0(s[1])+'</span><span class="r"></span><span class="r c4"></span><span class="r c5">'+N0.format(Math.round(s[1]/x.v*100))+'% do site</span></div>';});}});
+    if(k==="c203398070"&&x.n){var SA=siteAttr(A,B),grp={},late=[0,0],none=[0,0];
+      SA.forEach(function(o){var val=K==="v"?o.v:o.t;if(o.c.length){var key=o.c.map(function(c){return c[0]+" ("+(c[1]==="g"?"Google":"Meta")+")"}).join(" + ");var g=grp[key]||(grp[key]=[0,0]);g[0]+=val;g[1]++;}
+        else if(o.day>=iso(TODAY-1)){late[0]+=val;late[1]++;}else{none[0]+=val;none[1]++;}});
+      Object.keys(grp).sort(function(a,b){return grp[b][0]-grp[a][0]}).forEach(function(key){h+=subRow("↳ "+esc(key),grp[key]);});
+      if(late[1])h+=subRow("↳ ainda sem campanha: Google e Meta registram a venda em até 24h",late);
+      if(none[1])h+=subRow("↳ nenhuma campanha registrou (orgânico, direto ou sem rastreio)",none);
+      h+='<details class="qdet"><summary>Ver vendas do site uma a uma</summary>'+SA.slice().sort(function(a,b){return a.day<b.day?1:-1}).map(function(o){var val=K==="v"?o.v:o.t;
+        return '<div class="qrw sub"><span class="nm">'+o.day.slice(8,10)+'/'+o.day.slice(5,7)+' · pedido '+esc(o.id)+'</span><span class="qbar" style="font-size:12px">'+(o.c.length?esc(o.c.map(function(c){return c[0]+" ("+(c[1]==="g"?"Google":"Meta")+")"}).join(" + ")):(o.day>=iso(TODAY-1)?'aguardando Google/Meta':'sem campanha'))+'</span><span class="r">'+r0(val)+'</span><span class="r"></span><span class="r c4"></span><span class="r c5"></span></div>';}).join("")+'</details>';
+      function subRow(lb,g){return '<div class="qrw sub"><span class="nm">'+lb+'</span><span class="qbar"></span><span class="r">'+r0(g[0])+'</span><span class="r">'+n0(g[1])+'</span><span class="r c4"></span><span class="r c5">'+N0.format(Math.round(g[0]/Math.max(1,K==="v"?x.v:x.t)*100))+'% do site</span></div>';}}});
   var ptot=0;Object.keys(pm).forEach(function(k){ptot+=pm[k][K]});
   h+='<div class="qrw tot"><span class="nm"><span><b>Total</b></span></span><span class="qbar"></span><span class="r">'+r0(tot)+'</span><span class="r">'+n0(tn)+'</span><span class="r c4">'+r0(tot/Math.max(1,tn))+'</span><span class="r c5"><span class="delta '+(hasPm?pctCls(tot,ptot):"")+'">'+(hasPm?pctTxt(tot,ptot):"…")+'</span></span></div>';
-  el.innerHTML=hd+stack+h+'<p class="qnote">Vendedora = vendedor marcado no pedido do Bling (inclui licitações e B2B fechados por ela). Site dividido pelo que Google e Meta creditam a si mesmos; pode haver sobreposição, por isso a soma é limitada ao valor do site. Comparação: mesmos dias do mês anterior.</p>';
+  el.innerHTML=hd+stack+h+'<p class="qnote">Vendedora = vendedor marcado no pedido do Bling (inclui licitações e B2B fechados por ela). Campanha de cada venda do site = a campanha do Google ou da Meta que registrou uma venda com o mesmo valor no mesmo dia (±1 dia); quando as duas registram, aparecem as duas. O Google só manda o valor das vendas desde 10/11. Comparação: mesmos dias do mês anterior.</p>';
 }
 function renderVG(){
   var R=range(),A=iso(R.a),B=iso(R.b),X=vgRanges(),has=covered(A,B);
@@ -2493,6 +2508,13 @@ function vgSum(A,B,byCh){var o={n:0,v:0,t:0,ch:{},vd:{},vdMiss:0};
 function covered(A,B){return Object.keys(BL.lists).some(function(k){var p=k.split("|");return p[0]<=A&&p[1]>=B;});}
 function pctTxt(cur,prev){if(!prev)return cur?"novo":"—";var p=(cur-prev)/prev*100;return(p>0?"▲ ":p<0?"▼ ":"")+N0.format(Math.abs(Math.round(p)))+"%";}
 function pctCls(cur,prev){if(!prev)return"";return cur>=prev?"up":"down";}
+function siteAttr(A,B){
+  var A1=iso(idx(A)-1),B1=iso(idx(B)+1),byDay={},out=[];
+  Object.keys(BL.o).forEach(function(id){var r=BL.o[id];if(String(r[1])!=="203398070"||BEXC[r[2]]||r[0]<A1||r[0]>B1)return;var o={id:id,day:r[0],t:r[3],v:r[4]==null?r[3]:r[4],c:[]};(byDay[r[0]]||(byDay[r[0]]=[])).push(o);if(r[0]>=A&&r[0]<=B)out.push(o);});
+  function combo(arr,n,V){var res=null;(function go(st,pick,sumT,sumV){if(res)return;if(pick.length&&(Math.abs(sumT-V)<1.5||Math.abs(sumV-V)<1.5)){res=pick.slice();return;}if(pick.length>=n)return;for(var i=st;i<arr.length;i++){pick.push(arr[i]);go(i+1,pick,sumT+arr[i].t,sumV+arr[i].v);pick.pop();}})(0,[],0,0);return res;}
+  H.rows.slice().sort(function(a,b){return a[4]-b[4]}).forEach(function(r){if(!(r[4]>0)||!(r[5]>0))return;var d=iso(r[1]);if(d<A1||d>B1)return;var cm=H.camps[r[0]],nm=NICE[cm[0]]||cm[2];
+    [d,iso(r[1]-1),iso(r[1]+1)].some(function(dd){var arr=byDay[dd];if(!arr)return false;var f=combo(arr,Math.min(Math.round(r[4]),3),r[5]);if(!f)return false;f.forEach(function(o){if(!o.c.some(function(c){return c[0]===nm}))o.c.push([nm,cm[1]]);});return true;});});
+  return out;}
 function renderQV(){
   var el=document.getElementById("qv");if(!el)return;var R=range(),A=iso(R.a),B=iso(R.b),X=vgRanges(),K=VG.base==="v"?"v":"t";
   var hd='<div class="ch"><h3>Quem vendeu</h3><span class="h">'+fmtRange(R.a,R.b)+' · '+(K==="v"?"sem frete":"com frete")+' · todas as vendas do Bling, sem filtro de canal</span></div>';
@@ -2512,12 +2534,18 @@ function renderQV(){
       '<span class="qbar"><span class="tr"><span style="width:'+(sh*100).toFixed(1)+'%;background:'+f[2]+'"></span></span></span>'+
       '<span class="r"><b>'+r0(x[K])+'</b><br><small style="color:var(--ink-2)">'+N0.format(Math.round(sh*100))+'% do total</small></span><span class="r">'+n0(x.n)+'</span><span class="r c4">'+r0(x[K]/Math.max(1,x.n))+'</span>'+
       '<span class="r c5"><span class="delta '+(hasPm?pctCls(x[K],p):"")+'">'+(hasPm?pctTxt(x[K],p):"…")+'</span></span></div>';
-    if(k==="c203398070"&&x.v){var g=Math.min(G,x.v),m=Math.min(M,Math.max(0,x.v-g));
-      [["anúncios do Google (o que o Google credita)",g],["anúncios da Meta (o que a Meta credita)",m],["sem anúncio creditado (orgânico, direto)",Math.max(0,x.v-g-m)]].forEach(function(s){
-        h+='<div class="qrw sub"><span class="nm">↳ '+s[0]+'</span><span class="qbar"></span><span class="r">'+r0(s[1])+'</span><span class="r"></span><span class="r c4"></span><span class="r c5">'+N0.format(Math.round(s[1]/x.v*100))+'% do site</span></div>';});}});
+    if(k==="c203398070"&&x.n){var SA=siteAttr(A,B),grp={},late=[0,0],none=[0,0];
+      SA.forEach(function(o){var val=K==="v"?o.v:o.t;if(o.c.length){var key=o.c.map(function(c){return c[0]+" ("+(c[1]==="g"?"Google":"Meta")+")"}).join(" + ");var g=grp[key]||(grp[key]=[0,0]);g[0]+=val;g[1]++;}
+        else if(o.day>=iso(TODAY-1)){late[0]+=val;late[1]++;}else{none[0]+=val;none[1]++;}});
+      Object.keys(grp).sort(function(a,b){return grp[b][0]-grp[a][0]}).forEach(function(key){h+=subRow("↳ "+esc(key),grp[key]);});
+      if(late[1])h+=subRow("↳ ainda sem campanha: Google e Meta registram a venda em até 24h",late);
+      if(none[1])h+=subRow("↳ nenhuma campanha registrou (orgânico, direto ou sem rastreio)",none);
+      h+='<details class="qdet"><summary>Ver vendas do site uma a uma</summary>'+SA.slice().sort(function(a,b){return a.day<b.day?1:-1}).map(function(o){var val=K==="v"?o.v:o.t;
+        return '<div class="qrw sub"><span class="nm">'+o.day.slice(8,10)+'/'+o.day.slice(5,7)+' · pedido '+esc(o.id)+'</span><span class="qbar" style="font-size:12px">'+(o.c.length?esc(o.c.map(function(c){return c[0]+" ("+(c[1]==="g"?"Google":"Meta")+")"}).join(" + ")):(o.day>=iso(TODAY-1)?'aguardando Google/Meta':'sem campanha'))+'</span><span class="r">'+r0(val)+'</span><span class="r"></span><span class="r c4"></span><span class="r c5"></span></div>';}).join("")+'</details>';
+      function subRow(lb,g){return '<div class="qrw sub"><span class="nm">'+lb+'</span><span class="qbar"></span><span class="r">'+r0(g[0])+'</span><span class="r">'+n0(g[1])+'</span><span class="r c4"></span><span class="r c5">'+N0.format(Math.round(g[0]/Math.max(1,K==="v"?x.v:x.t)*100))+'% do site</span></div>';}}});
   var ptot=0;Object.keys(pm).forEach(function(k){ptot+=pm[k][K]});
   h+='<div class="qrw tot"><span class="nm"><span><b>Total</b></span></span><span class="qbar"></span><span class="r">'+r0(tot)+'</span><span class="r">'+n0(tn)+'</span><span class="r c4">'+r0(tot/Math.max(1,tn))+'</span><span class="r c5"><span class="delta '+(hasPm?pctCls(tot,ptot):"")+'">'+(hasPm?pctTxt(tot,ptot):"…")+'</span></span></div>';
-  el.innerHTML=hd+stack+h+'<p class="qnote">Vendedora = vendedor marcado no pedido do Bling (inclui licitações e B2B fechados por ela). Site dividido pelo que Google e Meta creditam a si mesmos; pode haver sobreposição, por isso a soma é limitada ao valor do site. Comparação: mesmos dias do mês anterior.</p>';
+  el.innerHTML=hd+stack+h+'<p class="qnote">Vendedora = vendedor marcado no pedido do Bling (inclui licitações e B2B fechados por ela). Campanha de cada venda do site = a campanha do Google ou da Meta que registrou uma venda com o mesmo valor no mesmo dia (±1 dia); quando as duas registram, aparecem as duas. O Google só manda o valor das vendas desde 10/11. Comparação: mesmos dias do mês anterior.</p>';
 }
 function renderVG(){
   var R=range(),A=iso(R.a),B=iso(R.b),X=vgRanges(),has=covered(A,B);
