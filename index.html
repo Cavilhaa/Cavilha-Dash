@@ -149,6 +149,7 @@ details.paused summary::-webkit-details-marker{display:none}
 .sbar .w{background:var(--green)}.sbar .rk{background:#F28B82}.sbar .bg{background:#FDD663}
 .slab{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;flex-wrap:wrap}
 .lose{color:var(--red);font-weight:500}
+.l6{padding:0}.l6 .ch{padding:14px 18px 8px}.l6 table td:first-child{font-weight:500}.l6 tr.tot td{font-weight:700}.l6 tr.muted td{color:var(--ink-2)}
 html.tvmode,html.tvmode body{background:#0B1220!important;overflow:hidden}
 html.tvmode body>*:not(#tv){display:none!important}
 #tv[hidden]{display:none!important}
@@ -455,6 +456,7 @@ tr.subr td:first-child{padding-left:26px}
 
   <section aria-labelledby="h-pl">
     <div class="st"><h2 id="h-pl">Linhas de produto e categorias</h2><span class="h" id="plHint"></span></div>
+    <div class="card l6" id="l6"></div>
     <div class="filters plf" role="group" aria-label="Filtrar linhas de produto">
       <div class="seg" id="plSrc" aria-label="Fonte dos dados"></div>
       <span class="chip" id="blChip"><i></i><span id="blTxt">Bling</span></span>
@@ -690,6 +692,7 @@ details.paused summary::-webkit-details-marker{display:none}
 .sbar .w{background:var(--green)}.sbar .rk{background:#F28B82}.sbar .bg{background:#FDD663}
 .slab{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;flex-wrap:wrap}
 .lose{color:var(--red);font-weight:500}
+.l6{padding:0}.l6 .ch{padding:14px 18px 8px}.l6 table td:first-child{font-weight:500}.l6 tr.tot td{font-weight:700}.l6 tr.muted td{color:var(--ink-2)}
 html.tvmode,html.tvmode body{background:#0B1220!important;overflow:hidden}
 html.tvmode body>*:not(#tv){display:none!important}
 #tv[hidden]{display:none!important}
@@ -996,6 +999,7 @@ tr.subr td:first-child{padding-left:26px}
 
   <section aria-labelledby="h-pl">
     <div class="st"><h2 id="h-pl">Linhas de produto e categorias</h2><span class="h" id="plHint"></span></div>
+    <div class="card l6" id="l6"></div>
     <div class="filters plf" role="group" aria-label="Filtrar linhas de produto">
       <div class="seg" id="plSrc" aria-label="Fonte dos dados"></div>
       <span class="chip" id="blChip"><i></i><span id="blTxt">Bling</span></span>
@@ -2004,6 +2008,54 @@ if(window.claude&&typeof window.claude.use==="function"){
   setInterval(function(){if(on())tvRender();},30000);
   sync();
 }catch(err){console.error("tv",err)}})();
+
+/* ---------- resumo das 6 linhas: WhatsApp x Loja Integrada ---------- */
+(function(){try{
+  var L6=["Cabines","Maca ginecológica","Maca fixa","Maca tubular","Maca transporte","Pia portátil"],OUT=6;
+  var V="loja";try{V=localStorage.getItem("mc-l6")||"loja"}catch(e){}
+  function cls(sku,t,line){var s=String(sku||"").toLowerCase();t=String(t||"").toLowerCase();
+    if(line===1||/cabine/.test(t)||/^(mcca|mccalr|mccats|mcsca|ca902)/.test(s))return 0;
+    if(line===3||/\bpia\b/.test(t)||/^mc-pia/.test(s))return 5;
+    if(/ginecol/.test(t)||/^mc18|^mc122/.test(s))return 1;
+    if(/transporte/.test(t)||/^mcmt/.test(s))return 4;
+    if(/tubular/.test(t)||/^mc02/.test(s))return 3;
+    if(/fixa/.test(t))return 2;return OUT;}
+  var PC={};function pl6(i){if(!(i in PC)){var p=PL.prods[i];PC[i]=cls(p[0],p[1],PL.cats[p[2]]?PL.cats[p[2]][0]:-1);}return PC[i];}
+  var CM={"CABINE":0,"GINECOLOGICA":1,"FIXA":2,"TUBULAR":3,"TRANSPORTE":4,"PIA":5};
+  function z(){return{inv:0,g:0,m:0,leads:0,won:0,wv:0,ped:0,un:0,fat:0};}
+  function render(){var el=document.getElementById("l6");if(!el)return;
+    var R=range(),A=iso(R.a),B=iso(R.b),row=[];for(var i=0;i<=OUT;i++)row.push(z());var mOut=0;
+    PL.rows.forEach(function(r){if(r[0]<R.a||r[0]>R.b)return;var x=row[pl6(r[2])];x.g+=r[3];x.inv+=r[3];});
+    H.rows.forEach(function(r){if(r[1]<R.a||r[1]>R.b)return;var c=H.camps[r[0]];if(c[1]!=="m")return;if(/cabine/i.test(c[2])){row[0].m+=r[2];row[0].inv+=r[2];}else mOut+=r[2];});
+    CRM.rows.forEach(function(r){var li=CM[r[2]];if(li==null)li=OUT;if(r[0]>=A&&r[0]<=B)row[li].leads++;if(cg(r[3])==="w"&&r[5]>=A&&r[5]<=B){row[li].won++;row[li].wv+=r[4];}});
+    var need=0,have=0;Object.keys(BL.o).forEach(function(id){var o=BL.o[id];if(String(o[1])!=="203398070"||BEXC[o[2]]||o[0]<A||o[0]>B)return;need++;var it=BL.it[id];if(!it)return;have++;
+      var seen={};it.forEach(function(x){var li=cls(x[0],x[1],-1),v=x[2]*x[3]-(x[4]||0);row[li].un+=x[2];row[li].fat+=v;if(!seen[li]){seen[li]=1;row[li].ped++;}});});
+    var T=z();row.forEach(function(x){for(var k in T)T[k]+=x[k];});
+    var hd='<div class="ch"><h3>Resumo das 6 linhas</h3><span class="h">'+fmtRange(R.a,R.b)+'</span></div>'+
+      '<div class="filters" style="padding:0 18px 10px"><div class="seg" id="l6V"><button type="button" data-v="loja" aria-pressed="'+(V==="loja")+'">Venda direta na Loja Integrada</button><button type="button" data-v="wpp" aria-pressed="'+(V==="wpp")+'">Venda pelo WhatsApp (planilha)</button></div></div>';
+    var names=L6.concat(["Outras linhas"]),body="";
+    function ret(v,i){return i>0?N1.format(v/i).replace(/,0$/,"")+"×":"–";}
+    if(V==="loja"){
+      var cov=covered(A,B);
+      var note=!cov?'<p class="qnote">Sem pedidos do Bling para este período'+(MCP?' — carregando…':' no link.')+'</p>':(have<need?'<p class="qnote" style="color:var(--amber)">'+(MCP?'Lendo os produtos dos pedidos do site no Bling: '+have+' de '+need+'. Os números sobem até terminar.':'Produtos de '+have+' de '+need+' pedidos carregados. A leitura por produto acontece quando o painel é aberto no Claude.')+'</p>':'');
+      body='<div class="tw"><table><thead><tr><th>Linha</th><th>Investido</th><th>Pedidos no site</th><th>Unidades</th><th>Faturado na loja</th><th>Retorno</th></tr></thead><tbody>'+
+        row.map(function(x,i){return '<tr'+(i===OUT?' class="muted"':'')+'><td>'+names[i]+'</td><td>'+r0(x.inv)+'</td><td>'+n0(x.ped)+'</td><td>'+n0(x.un)+'</td><td><b>'+r0(x.fat)+'</b></td><td>'+ret(x.fat,x.inv)+'</td></tr>';}).join("")+
+        '<tr class="tot"><td>Total</td><td>'+r0(T.inv)+'</td><td>'+n0(need)+'</td><td>'+n0(T.un)+'</td><td><b>'+r0(T.fat)+'</b></td><td>'+ret(T.fat,T.inv)+'</td></tr></tbody></table></div>'+note+
+        '<p class="qnote">Loja = pedidos da Loja Integrada no Bling, valor dos produtos sem frete, pelo produto realmente comprado (um pedido com 2 linhas conta nas duas). Retorno = faturado na loja ÷ investido na linha.</p>';
+    }else{
+      body='<div class="tw"><table><thead><tr><th>Linha</th><th>Investido</th><th>Leads</th><th>Vendas fechadas</th><th>Vendido pelo WhatsApp</th><th>Retorno</th><th>Custo por lead</th></tr></thead><tbody>'+
+        row.map(function(x,i){return '<tr'+(i===OUT?' class="muted"':'')+'><td>'+names[i]+'</td><td>'+r0(x.inv)+'</td><td>'+n0(x.leads)+'</td><td>'+n0(x.won)+'</td><td><b>'+r0(x.wv)+'</b></td><td>'+ret(x.wv,x.inv)+'</td><td>'+(x.leads?r0(x.inv/x.leads):"–")+'</td></tr>';}).join("")+
+        '<tr class="tot"><td>Total</td><td>'+r0(T.inv)+'</td><td>'+n0(T.leads)+'</td><td>'+n0(T.won)+'</td><td><b>'+r0(T.wv)+'</b></td><td>'+ret(T.wv,T.inv)+'</td><td>'+(T.leads?r0(T.inv/T.leads):"–")+'</td></tr></tbody></table></div>'+
+        '<p class="qnote">WhatsApp = tudo que as vendedoras fecharam na linha pela planilha (data da venda), não só o que veio de anúncio; inclui licitações e B2B. Leads pela data de entrada.</p>';
+    }
+    el.innerHTML=hd+body+'<p class="qnote">Investido = Google por produto anunciado (Shopping, PMax e Demand Gen) + Meta da campanha de cabines. Fora das linhas: Meta catálogo e vídeos ('+r0(mOut)+') e Google sem produto.</p>';
+  }
+  document.addEventListener("click",function(e){var b=e.target.closest("#l6V button");if(!b)return;V=b.getAttribute("data-v");try{localStorage.setItem("mc-l6",V)}catch(_){}render();});
+  var _ra=renderAll;renderAll=function(){_ra.apply(this,arguments);render();};
+  var _bl=blRender;blRender=function(){_bl.apply(this,arguments);render();};
+  if(typeof renderCRM==="function"){var _rc=renderCRM;renderCRM=function(){_rc.apply(this,arguments);render();};}
+  render();
+}catch(err){console.error("l6",err)}})();
 })();
 %%ENDSCRIPT%%>
 </script>
@@ -2930,6 +2982,54 @@ if(window.claude&&typeof window.claude.use==="function"){
   setInterval(function(){if(on())tvRender();},30000);
   sync();
 }catch(err){console.error("tv",err)}})();
+
+/* ---------- resumo das 6 linhas: WhatsApp x Loja Integrada ---------- */
+(function(){try{
+  var L6=["Cabines","Maca ginecológica","Maca fixa","Maca tubular","Maca transporte","Pia portátil"],OUT=6;
+  var V="loja";try{V=localStorage.getItem("mc-l6")||"loja"}catch(e){}
+  function cls(sku,t,line){var s=String(sku||"").toLowerCase();t=String(t||"").toLowerCase();
+    if(line===1||/cabine/.test(t)||/^(mcca|mccalr|mccats|mcsca|ca902)/.test(s))return 0;
+    if(line===3||/\bpia\b/.test(t)||/^mc-pia/.test(s))return 5;
+    if(/ginecol/.test(t)||/^mc18|^mc122/.test(s))return 1;
+    if(/transporte/.test(t)||/^mcmt/.test(s))return 4;
+    if(/tubular/.test(t)||/^mc02/.test(s))return 3;
+    if(/fixa/.test(t))return 2;return OUT;}
+  var PC={};function pl6(i){if(!(i in PC)){var p=PL.prods[i];PC[i]=cls(p[0],p[1],PL.cats[p[2]]?PL.cats[p[2]][0]:-1);}return PC[i];}
+  var CM={"CABINE":0,"GINECOLOGICA":1,"FIXA":2,"TUBULAR":3,"TRANSPORTE":4,"PIA":5};
+  function z(){return{inv:0,g:0,m:0,leads:0,won:0,wv:0,ped:0,un:0,fat:0};}
+  function render(){var el=document.getElementById("l6");if(!el)return;
+    var R=range(),A=iso(R.a),B=iso(R.b),row=[];for(var i=0;i<=OUT;i++)row.push(z());var mOut=0;
+    PL.rows.forEach(function(r){if(r[0]<R.a||r[0]>R.b)return;var x=row[pl6(r[2])];x.g+=r[3];x.inv+=r[3];});
+    H.rows.forEach(function(r){if(r[1]<R.a||r[1]>R.b)return;var c=H.camps[r[0]];if(c[1]!=="m")return;if(/cabine/i.test(c[2])){row[0].m+=r[2];row[0].inv+=r[2];}else mOut+=r[2];});
+    CRM.rows.forEach(function(r){var li=CM[r[2]];if(li==null)li=OUT;if(r[0]>=A&&r[0]<=B)row[li].leads++;if(cg(r[3])==="w"&&r[5]>=A&&r[5]<=B){row[li].won++;row[li].wv+=r[4];}});
+    var need=0,have=0;Object.keys(BL.o).forEach(function(id){var o=BL.o[id];if(String(o[1])!=="203398070"||BEXC[o[2]]||o[0]<A||o[0]>B)return;need++;var it=BL.it[id];if(!it)return;have++;
+      var seen={};it.forEach(function(x){var li=cls(x[0],x[1],-1),v=x[2]*x[3]-(x[4]||0);row[li].un+=x[2];row[li].fat+=v;if(!seen[li]){seen[li]=1;row[li].ped++;}});});
+    var T=z();row.forEach(function(x){for(var k in T)T[k]+=x[k];});
+    var hd='<div class="ch"><h3>Resumo das 6 linhas</h3><span class="h">'+fmtRange(R.a,R.b)+'</span></div>'+
+      '<div class="filters" style="padding:0 18px 10px"><div class="seg" id="l6V"><button type="button" data-v="loja" aria-pressed="'+(V==="loja")+'">Venda direta na Loja Integrada</button><button type="button" data-v="wpp" aria-pressed="'+(V==="wpp")+'">Venda pelo WhatsApp (planilha)</button></div></div>';
+    var names=L6.concat(["Outras linhas"]),body="";
+    function ret(v,i){return i>0?N1.format(v/i).replace(/,0$/,"")+"×":"–";}
+    if(V==="loja"){
+      var cov=covered(A,B);
+      var note=!cov?'<p class="qnote">Sem pedidos do Bling para este período'+(MCP?' — carregando…':' no link.')+'</p>':(have<need?'<p class="qnote" style="color:var(--amber)">'+(MCP?'Lendo os produtos dos pedidos do site no Bling: '+have+' de '+need+'. Os números sobem até terminar.':'Produtos de '+have+' de '+need+' pedidos carregados. A leitura por produto acontece quando o painel é aberto no Claude.')+'</p>':'');
+      body='<div class="tw"><table><thead><tr><th>Linha</th><th>Investido</th><th>Pedidos no site</th><th>Unidades</th><th>Faturado na loja</th><th>Retorno</th></tr></thead><tbody>'+
+        row.map(function(x,i){return '<tr'+(i===OUT?' class="muted"':'')+'><td>'+names[i]+'</td><td>'+r0(x.inv)+'</td><td>'+n0(x.ped)+'</td><td>'+n0(x.un)+'</td><td><b>'+r0(x.fat)+'</b></td><td>'+ret(x.fat,x.inv)+'</td></tr>';}).join("")+
+        '<tr class="tot"><td>Total</td><td>'+r0(T.inv)+'</td><td>'+n0(need)+'</td><td>'+n0(T.un)+'</td><td><b>'+r0(T.fat)+'</b></td><td>'+ret(T.fat,T.inv)+'</td></tr></tbody></table></div>'+note+
+        '<p class="qnote">Loja = pedidos da Loja Integrada no Bling, valor dos produtos sem frete, pelo produto realmente comprado (um pedido com 2 linhas conta nas duas). Retorno = faturado na loja ÷ investido na linha.</p>';
+    }else{
+      body='<div class="tw"><table><thead><tr><th>Linha</th><th>Investido</th><th>Leads</th><th>Vendas fechadas</th><th>Vendido pelo WhatsApp</th><th>Retorno</th><th>Custo por lead</th></tr></thead><tbody>'+
+        row.map(function(x,i){return '<tr'+(i===OUT?' class="muted"':'')+'><td>'+names[i]+'</td><td>'+r0(x.inv)+'</td><td>'+n0(x.leads)+'</td><td>'+n0(x.won)+'</td><td><b>'+r0(x.wv)+'</b></td><td>'+ret(x.wv,x.inv)+'</td><td>'+(x.leads?r0(x.inv/x.leads):"–")+'</td></tr>';}).join("")+
+        '<tr class="tot"><td>Total</td><td>'+r0(T.inv)+'</td><td>'+n0(T.leads)+'</td><td>'+n0(T.won)+'</td><td><b>'+r0(T.wv)+'</b></td><td>'+ret(T.wv,T.inv)+'</td><td>'+(T.leads?r0(T.inv/T.leads):"–")+'</td></tr></tbody></table></div>'+
+        '<p class="qnote">WhatsApp = tudo que as vendedoras fecharam na linha pela planilha (data da venda), não só o que veio de anúncio; inclui licitações e B2B. Leads pela data de entrada.</p>';
+    }
+    el.innerHTML=hd+body+'<p class="qnote">Investido = Google por produto anunciado (Shopping, PMax e Demand Gen) + Meta da campanha de cabines. Fora das linhas: Meta catálogo e vídeos ('+r0(mOut)+') e Google sem produto.</p>';
+  }
+  document.addEventListener("click",function(e){var b=e.target.closest("#l6V button");if(!b)return;V=b.getAttribute("data-v");try{localStorage.setItem("mc-l6",V)}catch(_){}render();});
+  var _ra=renderAll;renderAll=function(){_ra.apply(this,arguments);render();};
+  var _bl=blRender;blRender=function(){_bl.apply(this,arguments);render();};
+  if(typeof renderCRM==="function"){var _rc=renderCRM;renderCRM=function(){_rc.apply(this,arguments);render();};}
+  render();
+}catch(err){console.error("l6",err)}})();
 })();
 </script>
 </body></html>
