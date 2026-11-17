@@ -149,6 +149,36 @@ details.paused summary::-webkit-details-marker{display:none}
 .sbar .w{background:var(--green)}.sbar .rk{background:#F28B82}.sbar .bg{background:#FDD663}
 .slab{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;flex-wrap:wrap}
 .lose{color:var(--red);font-weight:500}
+html.tvmode,html.tvmode body{background:#0B1220!important;overflow:hidden}
+html.tvmode body>*:not(#tv){display:none!important}
+#tv[hidden]{display:none!important}
+#tv{position:fixed;inset:0;background:#0B1220;color:#E6EDF7;font-family:var(--f);padding:2.2vh 2.2vw;display:flex;flex-direction:column;gap:2vh;overflow:hidden}
+#tv small{font-size:.6em;color:#94A3B8;font-weight:400}
+.tvh{display:flex;align-items:center;justify-content:space-between;gap:2vw}
+.tvh b{font-size:2.4vh;display:block}.tvh span{font-size:1.6vh;color:#94A3B8}
+.tvday{font-size:2.6vh;font-weight:500}
+.tvclock{font-size:4.6vh;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;line-height:1}.tvclock span{display:block;font-size:1.4vh;font-weight:400;margin-top:.6vh}
+.tvk{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:1.6vw}
+#tv .c{background:#121B2E;border:1px solid #1E293B;border-radius:1.4vh;padding:2vh 1.6vw;display:flex;flex-direction:column;gap:1vh;min-width:0}
+#tv .l{font-size:1.7vh;letter-spacing:.08em;text-transform:uppercase;color:#94A3B8;font-weight:500}
+#tv .v{font-size:7vh;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+#tv .hero .v{font-size:9vh;color:#34D399}
+#tv .s{font-size:2vh;color:#CBD5E1}
+#tv .up{color:#34D399}#tv .dn{color:#F87171}
+.tvbar{height:1.1vh;background:#1E293B;border-radius:1vh;overflow:hidden}.tvbar i{display:block;height:100%;border-radius:1vh}
+.tvg{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:1fr auto;gap:1.6vw;flex:1;min-height:0}
+.tvg .rank{grid-row:1/3}
+.rr{display:grid;grid-template-columns:4vh 1fr auto;grid-template-rows:auto auto;column-gap:1vw;row-gap:.6vh;align-items:center;padding:1.2vh 0;border-top:1px solid #1E293B}
+.rr .pos{font-size:3.4vh;grid-row:1/3}.rr .nm{font-size:3vh;font-weight:500}.rr .nm small{display:block;font-size:1.7vh}.rr .vv{font-size:3.2vh;font-weight:700;font-variant-numeric:tabular-nums}
+.rr .tvbar{grid-column:2/4}
+.ct{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:.6vw;font-size:2.3vh;padding:.7vh 0;border-top:1px solid #1E293B;font-variant-numeric:tabular-nums}
+.ct span:not(:first-child){text-align:right}.ct:first-of-type{font-size:1.5vh;color:#94A3B8;border-top:0}.ct small{display:block;font-size:1.4vh}
+.ct.tot{font-weight:700}
+.cr{display:grid;grid-template-columns:1fr auto;row-gap:.5vh;font-size:2.2vh;padding:.6vh 0}.cr small{margin-left:.6vw}.cr .tvbar{grid-column:1/3}.cr span:nth-child(2){font-weight:700;font-variant-numeric:tabular-nums}
+.last{grid-column:2/4;overflow:hidden}
+.lr{display:grid;grid-template-columns:1.2vh 1fr auto;gap:1vw;align-items:center;font-size:2.1vh;padding:.6vh 0;border-top:1px solid #1E293B}.lr i{width:1.2vh;height:1.2vh;border-radius:50%}.lr b{font-variant-numeric:tabular-nums}
+.tvnone,.tvempty{font-size:2.2vh;color:#94A3B8;padding:2vh 0}
+.tvexit{position:fixed;right:1.2vw;bottom:1vh;font-size:1.2vh;color:#334155;text-decoration:none}.tvexit:hover{color:#94A3B8}
 h2[id],#qv{scroll-margin-top:120px}
 .toc{display:flex;gap:6px;flex-wrap:wrap;padding-top:4px}
 .toc button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--bg);color:var(--ink-2);border-radius:14px;padding:4px 11px;cursor:pointer}
@@ -316,6 +346,7 @@ tr.subr td:first-child{padding-left:26px}
     <div class="logo" aria-hidden="true">MC</div>
     <div class="brand"><b>Medical Company</b><span>Anúncios Google + Meta + Atendimento</span></div>
     <span class="chip" id="liveChip"><i></i><span id="liveTxt">Foto salva</span></span>
+    <a class="btn" href="#tv" title="Tela para a TV do operacional">Modo TV</a>
     <button class="btn" type="button" id="refreshBtn" hidden>Atualizar agora</button>
     <button class="btn" type="button" id="pubBtn" hidden title="Salva os números de agora no link que outras pessoas abrem"><span id="pubTxt">Link público</span></button>
   </div>
@@ -659,6 +690,36 @@ details.paused summary::-webkit-details-marker{display:none}
 .sbar .w{background:var(--green)}.sbar .rk{background:#F28B82}.sbar .bg{background:#FDD663}
 .slab{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;flex-wrap:wrap}
 .lose{color:var(--red);font-weight:500}
+html.tvmode,html.tvmode body{background:#0B1220!important;overflow:hidden}
+html.tvmode body>*:not(#tv){display:none!important}
+#tv[hidden]{display:none!important}
+#tv{position:fixed;inset:0;background:#0B1220;color:#E6EDF7;font-family:var(--f);padding:2.2vh 2.2vw;display:flex;flex-direction:column;gap:2vh;overflow:hidden}
+#tv small{font-size:.6em;color:#94A3B8;font-weight:400}
+.tvh{display:flex;align-items:center;justify-content:space-between;gap:2vw}
+.tvh b{font-size:2.4vh;display:block}.tvh span{font-size:1.6vh;color:#94A3B8}
+.tvday{font-size:2.6vh;font-weight:500}
+.tvclock{font-size:4.6vh;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;line-height:1}.tvclock span{display:block;font-size:1.4vh;font-weight:400;margin-top:.6vh}
+.tvk{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:1.6vw}
+#tv .c{background:#121B2E;border:1px solid #1E293B;border-radius:1.4vh;padding:2vh 1.6vw;display:flex;flex-direction:column;gap:1vh;min-width:0}
+#tv .l{font-size:1.7vh;letter-spacing:.08em;text-transform:uppercase;color:#94A3B8;font-weight:500}
+#tv .v{font-size:7vh;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+#tv .hero .v{font-size:9vh;color:#34D399}
+#tv .s{font-size:2vh;color:#CBD5E1}
+#tv .up{color:#34D399}#tv .dn{color:#F87171}
+.tvbar{height:1.1vh;background:#1E293B;border-radius:1vh;overflow:hidden}.tvbar i{display:block;height:100%;border-radius:1vh}
+.tvg{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:1fr auto;gap:1.6vw;flex:1;min-height:0}
+.tvg .rank{grid-row:1/3}
+.rr{display:grid;grid-template-columns:4vh 1fr auto;grid-template-rows:auto auto;column-gap:1vw;row-gap:.6vh;align-items:center;padding:1.2vh 0;border-top:1px solid #1E293B}
+.rr .pos{font-size:3.4vh;grid-row:1/3}.rr .nm{font-size:3vh;font-weight:500}.rr .nm small{display:block;font-size:1.7vh}.rr .vv{font-size:3.2vh;font-weight:700;font-variant-numeric:tabular-nums}
+.rr .tvbar{grid-column:2/4}
+.ct{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:.6vw;font-size:2.3vh;padding:.7vh 0;border-top:1px solid #1E293B;font-variant-numeric:tabular-nums}
+.ct span:not(:first-child){text-align:right}.ct:first-of-type{font-size:1.5vh;color:#94A3B8;border-top:0}.ct small{display:block;font-size:1.4vh}
+.ct.tot{font-weight:700}
+.cr{display:grid;grid-template-columns:1fr auto;row-gap:.5vh;font-size:2.2vh;padding:.6vh 0}.cr small{margin-left:.6vw}.cr .tvbar{grid-column:1/3}.cr span:nth-child(2){font-weight:700;font-variant-numeric:tabular-nums}
+.last{grid-column:2/4;overflow:hidden}
+.lr{display:grid;grid-template-columns:1.2vh 1fr auto;gap:1vw;align-items:center;font-size:2.1vh;padding:.6vh 0;border-top:1px solid #1E293B}.lr i{width:1.2vh;height:1.2vh;border-radius:50%}.lr b{font-variant-numeric:tabular-nums}
+.tvnone,.tvempty{font-size:2.2vh;color:#94A3B8;padding:2vh 0}
+.tvexit{position:fixed;right:1.2vw;bottom:1vh;font-size:1.2vh;color:#334155;text-decoration:none}.tvexit:hover{color:#94A3B8}
 h2[id],#qv{scroll-margin-top:120px}
 .toc{display:flex;gap:6px;flex-wrap:wrap;padding-top:4px}
 .toc button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--bg);color:var(--ink-2);border-radius:14px;padding:4px 11px;cursor:pointer}
@@ -826,6 +887,7 @@ tr.subr td:first-child{padding-left:26px}
     <div class="logo" aria-hidden="true">MC</div>
     <div class="brand"><b>Medical Company</b><span>Anúncios Google + Meta + Atendimento</span></div>
     <span class="chip" id="liveChip"><i></i><span id="liveTxt">Foto salva</span></span>
+    <a class="btn" href="#tv" title="Tela para a TV do operacional">Modo TV</a>
     <button class="btn" type="button" id="refreshBtn" hidden>Atualizar agora</button>
     <button class="btn" type="button" id="pubBtn" hidden title="Salva os números de agora no link que outras pessoas abrem"><span id="pubTxt">Link público</span></button>
   </div>
@@ -1886,6 +1948,62 @@ if(window.claude&&typeof window.claude.use==="function"){
     mcp.watchTool("Google Drive","read_file_content",{fileId:FID},crmLive,{cache:{staleTime:120000,gcTime:1800000},refetchInterval:600000});
   }).catch(function(){});
 }
+
+/* ---------- MODO TV (operacional) ---------- */
+(function(){try{
+  var root=document.createElement("div");root.id="tv";root.hidden=true;document.body.appendChild(root);
+  function on(){return location.hash==="#tv";}
+  function lastDay(){var m="";Object.keys(BL.o).forEach(function(id){var d=BL.o[id][0];if(d>m)m=d;});return m;}
+  function dayStr(){var real=iso(TODAY);if(MCP&&BL.st==="ok")return real;var l=lastDay();return l&&l<real?l:real;}
+  function vkOf(id){var v=vdKey(id);return v===null?"?":v;}
+  function sumB(A,B){var o={n:0,v:0,ch:{},vd:{},list:[]};Object.keys(BL.o).forEach(function(id){var r=BL.o[id];if(r[0]<A||r[0]>B||BEXC[r[2]])return;
+      var v=r[4]==null?r[3]:r[4],ch=String(r[1]);if(!CHN[ch])ch="203420937";var k=vkOf(id);o.n++;o.v+=v;
+      var c=o.ch[ch]||(o.ch[ch]={n:0,v:0});c.n++;c.v+=v;var d=o.vd[k]||(o.vd[k]={n:0,v:0});d.n++;d.v+=v;o.list.push([id,r[0],ch,k,v]);});return o;}
+  var VNAME=function(k){return VDN[k]||(k==="0"?"Loja (site/ML)":k==="x"?"Outros vendedores":"Sem vendedor carregado");};
+  var CHS={"0":"WhatsApp","203398070":"Site","206320079":"Mercado Livre","203420937":"Outras lojas"},CHC={"0":"#34D399","203398070":"#60A5FA","206320079":"#FBBF24","203420937":"#94A3B8"};
+  function big(v){return r0(v).replace("R$","<small>R$</small>");}
+  function bar(p,c){return '<div class="tvbar"><i style="width:'+Math.max(0,Math.min(100,p)).toFixed(1)+'%;background:'+c+'"></i></div>';}
+  function tvRender(){if(!on())return;
+    var D=dayStr(),ms=D.slice(0,8)+"01",pmA=sh(ms,-1,0),pmB=sh(D,-1,0),real=iso(TODAY),isToday=D===real;
+    var has=covered(D,D)||covered(ms,D),hd=sumB(D,D),mo=sumB(ms,D),pm=covered(pmA,pmB)?sumB(pmA,pmB):null;
+    var dt=dObj(idx(D)),dim=new Date(dt.getFullYear(),dt.getMonth()+1,0).getDate(),dd=+D.slice(8,10),goal=METAS[D.slice(0,7)]||0,proj=mo.v/dd*dim;
+    var now=new Date(),clock=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+    var h='<div class="tvh"><div><b>Medical Company</b><span>Vendas · operacional</span></div><div class="tvday">'+(isToday?"Hoje":"Último dia com dados")+', '+DIAS[dt.getDay()]+' '+br(idx(D))+'</div><div class="tvclock">'+clock+'<span>'+(MCP?"ao vivo":"foto de "+esc(H.asOf))+'</span></div></div>';
+    if(!has){root.innerHTML=h+'<div class="tvempty">Aguardando os pedidos do Bling…</div><a class="tvexit" href="#">sair do modo TV</a>';return;}
+    /* kpis */
+    var pct=pm&&pm.v?Math.round((mo.v-pm.v)/pm.v*100):null;
+    var k='<div class="tvk">'+
+      '<div class="c hero"><span class="l">Vendido '+(isToday?"hoje":"em "+br(idx(D)))+'</span><span class="v">'+big(hd.v)+'</span><span class="s"><b>'+n0(hd.n)+'</b> pedidos · ticket '+(hd.n?r0(hd.v/hd.n):"–")+'</span></div>'+
+      '<div class="c"><span class="l">No mês até '+br(idx(D))+'</span><span class="v">'+big(mo.v)+'</span><span class="s"><b>'+n0(mo.n)+'</b> pedidos'+(pct!=null?' · <b class="'+(pct>=0?"up":"dn")+'">'+(pct>=0?"▲ ":"▼ ")+Math.abs(pct)+'%</b> vs mês passado':'')+'</span></div>'+
+      (goal?'<div class="c"><span class="l">Meta de '+MESES[dt.getMonth()]+'</span><span class="v">'+N0.format(Math.round(mo.v/goal*100))+'<small>%</small></span>'+bar(mo.v/goal*100,mo.v/goal>=dd/dim?"#34D399":"#FBBF24")+'<span class="s">de '+r0(goal)+' · faltam <b>'+r0(Math.max(0,goal-mo.v))+'</b></span></div>'
+           :'<div class="c"><span class="l">Média por dia no mês</span><span class="v">'+big(mo.v/dd)+'</span><span class="s">'+(isToday?'hoje':'em '+br(idx(D)))+' <b class="'+(hd.v>=mo.v/dd?"up":"dn")+'">'+(hd.v>=mo.v/dd?"acima":"abaixo")+'</b> da média</span></div>')+
+      '</div>';
+    /* vendedoras */
+    var vk=Object.keys(mo.vd).filter(function(x){return VDN[x]}).sort(function(a,b){return mo.vd[b].v-mo.vd[a].v}),mx=Math.max.apply(null,vk.map(function(x){return mo.vd[x].v}).concat([1]));
+    var medals=["🥇","🥈","🥉"];
+    var vs='<div class="c rank"><span class="l">Vendedoras no mês</span>'+vk.map(function(x,i){var m=mo.vd[x],t=hd.vd[x]||{n:0,v:0};
+      return '<div class="rr"><span class="pos">'+(medals[i]||(i+1))+'</span><span class="nm">'+esc(VDN[x])+'<small>'+n0(m.n)+' pedidos'+(t.n?' · hoje <b>'+r0(t.v)+'</b>':'')+'</small></span><span class="vv">'+r0(m.v)+'</span>'+bar(m.v/mx*100,"#34D399")+'</div>';}).join("")+'</div>';
+    /* planilha */
+    var crm={},tot={l:0,o:0,w:0,wv:0};CRM.rows.forEach(function(r){var nm=nice(r[1]);var x=crm[nm]||(crm[nm]={l:0,o:0,w:0,wv:0});
+      if(r[0]===D){x.l++;tot.l++;if(cg(r[3])==="o"){x.o++;tot.o++;}}if(r[5]===D&&cg(r[3])==="w"){x.w++;x.wv+=r[4];tot.w++;tot.wv+=r[4];}});
+    var cn=Object.keys(crm).filter(function(n){var x=crm[n];return x.l||x.w;}).sort(function(a,b){return crm[b].l-crm[a].l});
+    var lastCRM="";CRM.rows.forEach(function(r){if(r[0]>lastCRM)lastCRM=r[0];});
+    var cs='<div class="c crm"><span class="l">Atendimento '+(isToday?"hoje":br(idx(D)))+' · planilha</span>'+(cn.length?'<div class="ct"><span></span><span>Leads</span><span>Em aberto</span><span>Fechou</span></div>'+cn.map(function(n){var x=crm[n];return '<div class="ct"><span>'+esc(n)+'</span><span>'+n0(x.l)+'</span><span>'+n0(x.o)+'</span><span>'+n0(x.w)+(x.wv?'<small>'+r0(x.wv)+'</small>':'')+'</span></div>';}).join("")+'<div class="ct tot"><span>Total</span><span>'+n0(tot.l)+'</span><span>'+n0(tot.o)+'</span><span>'+n0(tot.w)+'</span></div>'
+      :'<div class="tvnone">Nada lançado na planilha neste dia'+(lastCRM?' · último lançamento '+br(idx(lastCRM)):'')+'</div>')+'</div>';
+    /* canais + últimas */
+    var cks=Object.keys(CHS),cmx=Math.max.apply(null,cks.map(function(c){return(hd.ch[c]||{v:0}).v}).concat([1]));
+    var ch='<div class="c chs"><span class="l">Por canal '+(isToday?"hoje":br(idx(D)))+'</span>'+cks.map(function(c){var x=hd.ch[c]||{n:0,v:0};return '<div class="cr"><span>'+CHS[c]+'<small>'+n0(x.n)+' ped.</small></span><span>'+r0(x.v)+'</span>'+bar(x.v/cmx*100,CHC[c])+'</div>';}).join("")+'</div>';
+    var L=(hd.list.length>=3?hd.list:mo.list).slice().sort(function(a,b){return a[0]<b[0]?1:-1}).slice(0,4);
+    var ls='<div class="c last"><span class="l">Últimas vendas</span>'+L.map(function(x){return '<div class="lr"><i style="background:'+CHC[x[2]]+'"></i><span>'+br(idx(x[1]))+' · '+CHS[x[2]]+(VDN[x[3]]?' · '+esc(VDN[x[3]]):'')+'</span><b>'+r0(x[4])+'</b></div>';}).join("")+'</div>';
+    root.innerHTML=h+k+'<div class="tvg">'+vs+cs+ch+ls+'</div><a class="tvexit" href="#">sair do modo TV</a>';
+  }
+  function sync(){var t=on();document.documentElement.classList.toggle("tvmode",t);root.hidden=!t;if(t){tvRender();try{document.title="TV · Medical Company"}catch(e){}}}
+  window.addEventListener("hashchange",sync);
+  var _rv=renderVG;renderVG=function(){_rv.apply(this,arguments);if(on())tvRender();};
+  if(typeof renderCRM==="function"){var _rc=renderCRM;renderCRM=function(){_rc.apply(this,arguments);if(on())tvRender();};}
+  setInterval(function(){if(on())tvRender();},30000);
+  sync();
+}catch(err){console.error("tv",err)}})();
 })();
 %%ENDSCRIPT%%>
 </script>
@@ -2756,6 +2874,62 @@ if(window.claude&&typeof window.claude.use==="function"){
     mcp.watchTool("Google Drive","read_file_content",{fileId:FID},crmLive,{cache:{staleTime:120000,gcTime:1800000},refetchInterval:600000});
   }).catch(function(){});
 }
+
+/* ---------- MODO TV (operacional) ---------- */
+(function(){try{
+  var root=document.createElement("div");root.id="tv";root.hidden=true;document.body.appendChild(root);
+  function on(){return location.hash==="#tv";}
+  function lastDay(){var m="";Object.keys(BL.o).forEach(function(id){var d=BL.o[id][0];if(d>m)m=d;});return m;}
+  function dayStr(){var real=iso(TODAY);if(MCP&&BL.st==="ok")return real;var l=lastDay();return l&&l<real?l:real;}
+  function vkOf(id){var v=vdKey(id);return v===null?"?":v;}
+  function sumB(A,B){var o={n:0,v:0,ch:{},vd:{},list:[]};Object.keys(BL.o).forEach(function(id){var r=BL.o[id];if(r[0]<A||r[0]>B||BEXC[r[2]])return;
+      var v=r[4]==null?r[3]:r[4],ch=String(r[1]);if(!CHN[ch])ch="203420937";var k=vkOf(id);o.n++;o.v+=v;
+      var c=o.ch[ch]||(o.ch[ch]={n:0,v:0});c.n++;c.v+=v;var d=o.vd[k]||(o.vd[k]={n:0,v:0});d.n++;d.v+=v;o.list.push([id,r[0],ch,k,v]);});return o;}
+  var VNAME=function(k){return VDN[k]||(k==="0"?"Loja (site/ML)":k==="x"?"Outros vendedores":"Sem vendedor carregado");};
+  var CHS={"0":"WhatsApp","203398070":"Site","206320079":"Mercado Livre","203420937":"Outras lojas"},CHC={"0":"#34D399","203398070":"#60A5FA","206320079":"#FBBF24","203420937":"#94A3B8"};
+  function big(v){return r0(v).replace("R$","<small>R$</small>");}
+  function bar(p,c){return '<div class="tvbar"><i style="width:'+Math.max(0,Math.min(100,p)).toFixed(1)+'%;background:'+c+'"></i></div>';}
+  function tvRender(){if(!on())return;
+    var D=dayStr(),ms=D.slice(0,8)+"01",pmA=sh(ms,-1,0),pmB=sh(D,-1,0),real=iso(TODAY),isToday=D===real;
+    var has=covered(D,D)||covered(ms,D),hd=sumB(D,D),mo=sumB(ms,D),pm=covered(pmA,pmB)?sumB(pmA,pmB):null;
+    var dt=dObj(idx(D)),dim=new Date(dt.getFullYear(),dt.getMonth()+1,0).getDate(),dd=+D.slice(8,10),goal=METAS[D.slice(0,7)]||0,proj=mo.v/dd*dim;
+    var now=new Date(),clock=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+    var h='<div class="tvh"><div><b>Medical Company</b><span>Vendas · operacional</span></div><div class="tvday">'+(isToday?"Hoje":"Último dia com dados")+', '+DIAS[dt.getDay()]+' '+br(idx(D))+'</div><div class="tvclock">'+clock+'<span>'+(MCP?"ao vivo":"foto de "+esc(H.asOf))+'</span></div></div>';
+    if(!has){root.innerHTML=h+'<div class="tvempty">Aguardando os pedidos do Bling…</div><a class="tvexit" href="#">sair do modo TV</a>';return;}
+    /* kpis */
+    var pct=pm&&pm.v?Math.round((mo.v-pm.v)/pm.v*100):null;
+    var k='<div class="tvk">'+
+      '<div class="c hero"><span class="l">Vendido '+(isToday?"hoje":"em "+br(idx(D)))+'</span><span class="v">'+big(hd.v)+'</span><span class="s"><b>'+n0(hd.n)+'</b> pedidos · ticket '+(hd.n?r0(hd.v/hd.n):"–")+'</span></div>'+
+      '<div class="c"><span class="l">No mês até '+br(idx(D))+'</span><span class="v">'+big(mo.v)+'</span><span class="s"><b>'+n0(mo.n)+'</b> pedidos'+(pct!=null?' · <b class="'+(pct>=0?"up":"dn")+'">'+(pct>=0?"▲ ":"▼ ")+Math.abs(pct)+'%</b> vs mês passado':'')+'</span></div>'+
+      (goal?'<div class="c"><span class="l">Meta de '+MESES[dt.getMonth()]+'</span><span class="v">'+N0.format(Math.round(mo.v/goal*100))+'<small>%</small></span>'+bar(mo.v/goal*100,mo.v/goal>=dd/dim?"#34D399":"#FBBF24")+'<span class="s">de '+r0(goal)+' · faltam <b>'+r0(Math.max(0,goal-mo.v))+'</b></span></div>'
+           :'<div class="c"><span class="l">Média por dia no mês</span><span class="v">'+big(mo.v/dd)+'</span><span class="s">'+(isToday?'hoje':'em '+br(idx(D)))+' <b class="'+(hd.v>=mo.v/dd?"up":"dn")+'">'+(hd.v>=mo.v/dd?"acima":"abaixo")+'</b> da média</span></div>')+
+      '</div>';
+    /* vendedoras */
+    var vk=Object.keys(mo.vd).filter(function(x){return VDN[x]}).sort(function(a,b){return mo.vd[b].v-mo.vd[a].v}),mx=Math.max.apply(null,vk.map(function(x){return mo.vd[x].v}).concat([1]));
+    var medals=["🥇","🥈","🥉"];
+    var vs='<div class="c rank"><span class="l">Vendedoras no mês</span>'+vk.map(function(x,i){var m=mo.vd[x],t=hd.vd[x]||{n:0,v:0};
+      return '<div class="rr"><span class="pos">'+(medals[i]||(i+1))+'</span><span class="nm">'+esc(VDN[x])+'<small>'+n0(m.n)+' pedidos'+(t.n?' · hoje <b>'+r0(t.v)+'</b>':'')+'</small></span><span class="vv">'+r0(m.v)+'</span>'+bar(m.v/mx*100,"#34D399")+'</div>';}).join("")+'</div>';
+    /* planilha */
+    var crm={},tot={l:0,o:0,w:0,wv:0};CRM.rows.forEach(function(r){var nm=nice(r[1]);var x=crm[nm]||(crm[nm]={l:0,o:0,w:0,wv:0});
+      if(r[0]===D){x.l++;tot.l++;if(cg(r[3])==="o"){x.o++;tot.o++;}}if(r[5]===D&&cg(r[3])==="w"){x.w++;x.wv+=r[4];tot.w++;tot.wv+=r[4];}});
+    var cn=Object.keys(crm).filter(function(n){var x=crm[n];return x.l||x.w;}).sort(function(a,b){return crm[b].l-crm[a].l});
+    var lastCRM="";CRM.rows.forEach(function(r){if(r[0]>lastCRM)lastCRM=r[0];});
+    var cs='<div class="c crm"><span class="l">Atendimento '+(isToday?"hoje":br(idx(D)))+' · planilha</span>'+(cn.length?'<div class="ct"><span></span><span>Leads</span><span>Em aberto</span><span>Fechou</span></div>'+cn.map(function(n){var x=crm[n];return '<div class="ct"><span>'+esc(n)+'</span><span>'+n0(x.l)+'</span><span>'+n0(x.o)+'</span><span>'+n0(x.w)+(x.wv?'<small>'+r0(x.wv)+'</small>':'')+'</span></div>';}).join("")+'<div class="ct tot"><span>Total</span><span>'+n0(tot.l)+'</span><span>'+n0(tot.o)+'</span><span>'+n0(tot.w)+'</span></div>'
+      :'<div class="tvnone">Nada lançado na planilha neste dia'+(lastCRM?' · último lançamento '+br(idx(lastCRM)):'')+'</div>')+'</div>';
+    /* canais + últimas */
+    var cks=Object.keys(CHS),cmx=Math.max.apply(null,cks.map(function(c){return(hd.ch[c]||{v:0}).v}).concat([1]));
+    var ch='<div class="c chs"><span class="l">Por canal '+(isToday?"hoje":br(idx(D)))+'</span>'+cks.map(function(c){var x=hd.ch[c]||{n:0,v:0};return '<div class="cr"><span>'+CHS[c]+'<small>'+n0(x.n)+' ped.</small></span><span>'+r0(x.v)+'</span>'+bar(x.v/cmx*100,CHC[c])+'</div>';}).join("")+'</div>';
+    var L=(hd.list.length>=3?hd.list:mo.list).slice().sort(function(a,b){return a[0]<b[0]?1:-1}).slice(0,4);
+    var ls='<div class="c last"><span class="l">Últimas vendas</span>'+L.map(function(x){return '<div class="lr"><i style="background:'+CHC[x[2]]+'"></i><span>'+br(idx(x[1]))+' · '+CHS[x[2]]+(VDN[x[3]]?' · '+esc(VDN[x[3]]):'')+'</span><b>'+r0(x[4])+'</b></div>';}).join("")+'</div>';
+    root.innerHTML=h+k+'<div class="tvg">'+vs+cs+ch+ls+'</div><a class="tvexit" href="#">sair do modo TV</a>';
+  }
+  function sync(){var t=on();document.documentElement.classList.toggle("tvmode",t);root.hidden=!t;if(t){tvRender();try{document.title="TV · Medical Company"}catch(e){}}}
+  window.addEventListener("hashchange",sync);
+  var _rv=renderVG;renderVG=function(){_rv.apply(this,arguments);if(on())tvRender();};
+  if(typeof renderCRM==="function"){var _rc=renderCRM;renderCRM=function(){_rc.apply(this,arguments);if(on())tvRender();};}
+  setInterval(function(){if(on())tvRender();},30000);
+  sync();
+}catch(err){console.error("tv",err)}})();
 })();
 </script>
 </body></html>
