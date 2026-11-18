@@ -149,6 +149,15 @@ details.paused summary::-webkit-details-marker{display:none}
 .sbar .w{background:var(--green)}.sbar .rk{background:#F28B82}.sbar .bg{background:#FDD663}
 .slab{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;flex-wrap:wrap}
 .lose{color:var(--red);font-weight:500}
+.crs .ch{padding:14px 18px 8px;flex-wrap:wrap}.crs .ch .h b{color:var(--ink);font-weight:600}
+.crg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;padding:4px 18px 14px}@media (max-width:900px){.crg{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:480px){.crg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.crc{border:1px solid var(--line-2);border-top:3px solid var(--c);border-radius:8px;padding:10px 12px;display:grid;gap:2px}.crc .t{font-size:12px;color:var(--ink-2)}.crc .v{font-size:24px;font-weight:500;font-variant-numeric:tabular-nums}.crc .s{font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}.crc .s2{font-size:11.5px;color:var(--ink-3)}
+.tvband{font-size:1.7vh;letter-spacing:.14em;text-transform:uppercase;color:#64748B;font-weight:700;margin-bottom:-1vh}
+.tvrow3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:1.4vw}.tvrow5{display:grid;grid-template-columns:1.25fr repeat(4,1fr);gap:1.4vw}.tvrow5 .v{font-size:4.4vh!important}#tv .tvrow5 .s{font-size:1.75vh}#tv .tvrow5 .l{font-size:1.5vh}.tvrow5 .c{gap:.7vh}
+.tvrow2{display:grid;grid-template-columns:1fr 1fr;gap:1.4vw;flex:1;min-height:0}.tvrow2 .rank,.tvrow2 .last{grid-row:auto;grid-column:auto;overflow:hidden}
+#tv .tvrow3 .hero .v{font-size:7vh}#tv{gap:1.4vh}#tv .c{padding:1.6vh 1.4vw}
+.tvrow3 .cr{font-size:1.85vh;padding:.25vh 0}.tvrow3 .ct{font-size:1.85vh;padding:.35vh 0}.tvrow3 .ct small{display:inline;margin-left:.4vw}
+.tvrow2 .rr{padding:.6vh 0;row-gap:.3vh}.tvrow2 .rr .nm{font-size:2.4vh}.tvrow2 .rr .nm small{display:inline;margin-left:.6vw;font-size:1.6vh}.tvrow2 .rr .vv{font-size:2.6vh}.tvrow2 .rr .pos{font-size:2.6vh}.tvrow2 .lr{font-size:1.9vh;padding:.45vh 0}
 .mc4 .ch{padding:14px 18px 8px}.mc4t td:first-child{font-weight:600}.mc4t tr.tot td{font-weight:700;border-top:1px solid var(--line)}.mc4n{display:block;font-size:11px;color:var(--ink-3);font-weight:400}
 .mc4p{min-width:140px}.mc4bar{position:relative;display:block;height:6px;background:var(--line);border-radius:4px;margin-top:4px}.mc4bar i{display:block;height:100%;border-radius:4px}.mc4bar b{position:absolute;top:-3px;width:2px;height:12px;background:var(--ink);opacity:.55}
 .mc4f{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;padding:10px 18px 16px}.mc4f label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--ink-2)}.mc4f input{width:140px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}.mc4f button{padding:7px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
@@ -398,6 +407,7 @@ tr.subr td:first-child{padding-left:26px}
       <div class="card vg-goal" id="vgGoal"></div>
     </div>
     <div class="card mc4" id="mc4"></div>
+    <div class="card crs" id="crs"></div>
     <div class="card qv" id="qv"></div>
     <details class="vg-det"><summary>Ver tabelas detalhadas · por canal e por vendedor (igual ao Bling)</summary>
     <div style="display:grid;gap:12px">
@@ -543,7 +553,7 @@ tr.subr td:first-child{padding-left:26px}
     </section>
   </div>
 
-  <footer id="foot">Fontes: Google Ads (conta 243-842-1661) e Meta Ads (conta 1798483716959100), histórico diário dos últimos 90 dias. Vendas e WhatsApp do Google contam no dia em que aconteceram. Guincho fica fora dos totais. Quem tem as contas conectadas no Claude vê os números atualizando sozinhos a cada 5 minutos; para quem abre pelo link sem Claude aparecem os números da última vez que o painel foi aberto por quem tem as contas conectadas (salvos sozinhos), com a hora indicada no topo.</footer>
+  <footer id="foot">Fontes: Google Ads (conta 243-842-1661) e Meta Ads (conta 1798483716959100), histórico diário dos últimos 90 dias. Vendas e WhatsApp do Google contam no dia em que aconteceram. Guincho fica fora dos totais. Aberto no Claude, o painel atualiza sozinho a cada 5 minutos (anúncios, Bling e planilha) e salva os números no link público a cada 10 minutos, sem clicar em nada. Quem abre pelo link vê a última vez que o painel esteve aberto no Claude, com a hora indicada no topo.</footer>
 </main>
 
 <script type="text/plain" id="tplsrc"><title>Painel Medical Company</title>
@@ -697,6 +707,15 @@ details.paused summary::-webkit-details-marker{display:none}
 .sbar .w{background:var(--green)}.sbar .rk{background:#F28B82}.sbar .bg{background:#FDD663}
 .slab{display:flex;gap:10px;font-size:11.5px;color:var(--ink-2);margin-top:4px;flex-wrap:wrap}
 .lose{color:var(--red);font-weight:500}
+.crs .ch{padding:14px 18px 8px;flex-wrap:wrap}.crs .ch .h b{color:var(--ink);font-weight:600}
+.crg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;padding:4px 18px 14px}@media (max-width:900px){.crg{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:480px){.crg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.crc{border:1px solid var(--line-2);border-top:3px solid var(--c);border-radius:8px;padding:10px 12px;display:grid;gap:2px}.crc .t{font-size:12px;color:var(--ink-2)}.crc .v{font-size:24px;font-weight:500;font-variant-numeric:tabular-nums}.crc .s{font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}.crc .s2{font-size:11.5px;color:var(--ink-3)}
+.tvband{font-size:1.7vh;letter-spacing:.14em;text-transform:uppercase;color:#64748B;font-weight:700;margin-bottom:-1vh}
+.tvrow3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:1.4vw}.tvrow5{display:grid;grid-template-columns:1.25fr repeat(4,1fr);gap:1.4vw}.tvrow5 .v{font-size:4.4vh!important}#tv .tvrow5 .s{font-size:1.75vh}#tv .tvrow5 .l{font-size:1.5vh}.tvrow5 .c{gap:.7vh}
+.tvrow2{display:grid;grid-template-columns:1fr 1fr;gap:1.4vw;flex:1;min-height:0}.tvrow2 .rank,.tvrow2 .last{grid-row:auto;grid-column:auto;overflow:hidden}
+#tv .tvrow3 .hero .v{font-size:7vh}#tv{gap:1.4vh}#tv .c{padding:1.6vh 1.4vw}
+.tvrow3 .cr{font-size:1.85vh;padding:.25vh 0}.tvrow3 .ct{font-size:1.85vh;padding:.35vh 0}.tvrow3 .ct small{display:inline;margin-left:.4vw}
+.tvrow2 .rr{padding:.6vh 0;row-gap:.3vh}.tvrow2 .rr .nm{font-size:2.4vh}.tvrow2 .rr .nm small{display:inline;margin-left:.6vw;font-size:1.6vh}.tvrow2 .rr .vv{font-size:2.6vh}.tvrow2 .rr .pos{font-size:2.6vh}.tvrow2 .lr{font-size:1.9vh;padding:.45vh 0}
 .mc4 .ch{padding:14px 18px 8px}.mc4t td:first-child{font-weight:600}.mc4t tr.tot td{font-weight:700;border-top:1px solid var(--line)}.mc4n{display:block;font-size:11px;color:var(--ink-3);font-weight:400}
 .mc4p{min-width:140px}.mc4bar{position:relative;display:block;height:6px;background:var(--line);border-radius:4px;margin-top:4px}.mc4bar i{display:block;height:100%;border-radius:4px}.mc4bar b{position:absolute;top:-3px;width:2px;height:12px;background:var(--ink);opacity:.55}
 .mc4f{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;padding:10px 18px 16px}.mc4f label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--ink-2)}.mc4f input{width:140px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}.mc4f button{padding:7px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
@@ -946,6 +965,7 @@ tr.subr td:first-child{padding-left:26px}
       <div class="card vg-goal" id="vgGoal"></div>
     </div>
     <div class="card mc4" id="mc4"></div>
+    <div class="card crs" id="crs"></div>
     <div class="card qv" id="qv"></div>
     <details class="vg-det"><summary>Ver tabelas detalhadas · por canal e por vendedor (igual ao Bling)</summary>
     <div style="display:grid;gap:12px">
@@ -1091,7 +1111,7 @@ tr.subr td:first-child{padding-left:26px}
     </section>
   </div>
 
-  <footer id="foot">Fontes: Google Ads (conta 243-842-1661) e Meta Ads (conta 1798483716959100), histórico diário dos últimos 90 dias. Vendas e WhatsApp do Google contam no dia em que aconteceram. Guincho fica fora dos totais. Quem tem as contas conectadas no Claude vê os números atualizando sozinhos a cada 5 minutos; para quem abre pelo link sem Claude aparecem os números da última vez que o painel foi aberto por quem tem as contas conectadas (salvos sozinhos), com a hora indicada no topo.</footer>
+  <footer id="foot">Fontes: Google Ads (conta 243-842-1661) e Meta Ads (conta 1798483716959100), histórico diário dos últimos 90 dias. Vendas e WhatsApp do Google contam no dia em que aconteceram. Guincho fica fora dos totais. Aberto no Claude, o painel atualiza sozinho a cada 5 minutos (anúncios, Bling e planilha) e salva os números no link público a cada 10 minutos, sem clicar em nada. Quem abre pelo link vê a última vez que o painel esteve aberto no Claude, com a hora indicada no topo.</footer>
 </main>
 
 <script type="text/plain" id="tplsrc">__TPL__%%ENDSCRIPT%%>
@@ -1820,7 +1840,7 @@ function mc4Tone(p,exp){return p>=exp?"var(--green)":p>=exp*0.75?"var(--amber)":
 function mc4Render(){var el=document.getElementById("mc4");if(!el)return;
   var m=iso(range().b).slice(0,7),d=mc4Data(m),mn=MESES[+m.slice(5,7)-1],exp=d.dd/d.dim,left=Math.max(1,d.dim-d.dd+(d.cur?1:0));
   var any=MC4CH.some(function(c){return d.ch[c[2]].meta>0;});
-  var h='<div class="ch"><h3>Meta de '+mn+' por canal</h3><span class="h">pelo Bling · '+(d.base==="v"?"sem frete":"com frete")+(d.cur?' · dia '+d.dd+' de '+d.dim+' ('+Math.round(exp*100)+'% do mês)':'')+'</span></div>';
+  var h='<div class="ch"><h3>Meta do mês · '+mn+'/'+m.slice(0,4)+'</h3><span class="h">mês inteiro, não muda com o período escolhido · pelo Bling · '+(d.base==="v"?"sem frete":"com frete")+(d.cur?' · dia '+d.dd+' de '+d.dim+' ('+Math.round(exp*100)+'% do mês)':'')+'</span></div>';
   if(!d.has&&!d.tot.v){el.innerHTML=h+'<p class="qnote" style="padding:0 18px 14px">Carregando pedidos do mês…</p>'+mc4Form(m,d);return;}
   if(!any){el.innerHTML=h+'<p class="qnote" style="padding:0 18px 14px">Nenhuma meta por canal definida para '+mn+'.</p>'+mc4Form(m,d);return;}
   function row(nm,x,cls){var p=x.meta?x.v/x.meta:0,f=Math.max(0,x.meta-x.v),proj=d.dd?x.v/d.dd*d.dim:x.v,tone=mc4Tone(p,exp);
@@ -1835,14 +1855,43 @@ function mc4Render(){var el=document.getElementById("mc4");if(!el)return;
 }
 function mc4Form(m,d){if(!DB)return '<p class="qnote" style="padding:6px 18px 14px">Para mudar as metas, abra o painel no Claude com sua conta.</p>';
   return '<form id="mc4F" class="mc4f">'+MC4CH.map(function(c){var v=d.ch[c[2]].meta;return '<label>'+c[1]+' (R$)<input name="'+c[2]+'" inputmode="decimal" value="'+(v?String(v).replace(".",","):"")+'"></label>';}).join("")+'<button type="submit">Salvar metas de '+MESES[+m.slice(5,7)-1]+'</button>'+(METAERR?'<span class="qnote">'+esc(METAERR)+'</span>':'')+'</form>';}
-function mc4tv(){try{var m=iso(TODAY).slice(0,7),d=mc4Data(m);if(!MC4CH.some(function(c){return d.ch[c[2]].meta>0;}))return "";var exp=d.dd/d.dim;
-  return '<div class="tvm4">'+MC4CH.concat([["","Total","tot","#E2E8F0"]]).map(function(c){var x=c[2]==="tot"?d.tot:d.ch[c[2]],p=x.meta?x.v/x.meta:0;
-    return '<div class="c"><span class="l">Meta '+c[1]+'</span><span class="v">'+Math.round(p*100)+'<small>%</small></span>'+'<div class="tvbar"><i style="width:'+Math.min(100,p*100).toFixed(1)+'%;background:'+(p>=exp?"#34D399":p>=exp*0.75?"#FBBF24":"#F87171")+'"></i></div>'+'<span class="s">'+r0(x.v)+' de '+r0(x.meta)+'</span></div>';}).join("")+'</div>';}catch(e){return "";}}
+function mc4tv(bare){try{var m=iso(TODAY).slice(0,7),d=mc4Data(m);if(!MC4CH.some(function(c){return d.ch[c[2]].meta>0;}))return "";var exp=d.dd/d.dim;
+  return (bare?'':'<div class="tvm4">')+MC4CH.concat([["","Total","tot","#E2E8F0"]]).map(function(c){var x=c[2]==="tot"?d.tot:d.ch[c[2]],p=x.meta?x.v/x.meta:0;
+    return '<div class="c"><span class="l">Meta '+(c[2]==="ml"?"ML":c[1])+'</span><span class="v">'+Math.round(p*100)+'<small>%</small></span>'+'<div class="tvbar"><i style="width:'+Math.min(100,p*100).toFixed(1)+'%;background:'+(p>=exp?"#34D399":p>=exp*0.75?"#FBBF24":"#F87171")+'"></i></div>'+'<span class="s">'+r0(x.v)+' de '+r0(x.meta)+'</span></div>';}).join("")+(bare?'':'</div>');}catch(e){return "";}}
 document.addEventListener("submit",function(e){if(!e.target||e.target.id!=="mc4F")return;e.preventDefault();if(!DB)return;
   var m=iso(range().b).slice(0,7),u={},tot=0;MC4CH.forEach(function(c){var raw=(e.target.elements[c[2]].value||"").replace(/\./g,"").replace(",",".");var v=Math.round((parseFloat(raw)||0)*100)/100;u[m+"|"+c[2]]=v;tot+=v;});
   u[m]=Math.round(tot*100)/100;METAERR="Salvando…";mc4Render();
   DB.doc("config/metas").set(Object.assign({},METAS,u)).then(function(){METAERR="";renderVG();}).catch(function(err){METAERR=(err&&err.code==="permission_denied")?"Você não tem permissão para mudar a meta.":"Não salvou, tente de novo.";mc4Render();});});
 (function(){var _rv=renderVG;renderVG=function(){_rv.apply(this,arguments);try{mc4Render();}catch(e){console.error("mc4",e)}};})();
+
+
+/* ---------- resumo da planilha de atendimento ---------- */
+var CRS_ST=[["Em atendimento",/ATENDIMENTO|SONDAGEM|ATEND\.|SEM STATUS|NOVO LEAD/],["Proposta enviada",/PROPOSTA/],["Negociando",/NEGOCIA|FOLLOW|AGUARDANDO|LICITA/]];
+function crsStage(st){if(WON.test(st))return 3;if(LOST.test(st))return 4;for(var i=0;i<CRS_ST.length;i++)if(CRS_ST[i][1].test(st))return i;return 0;}
+function crsCalc(A,B){var o={l:0,st:[[0,0],[0,0],[0,0],[0,0],[0,0]],w:0,wv:0};
+  CRM.rows.forEach(function(r){if(r[0]>=A&&r[0]<=B){o.l++;var s=crsStage(r[3]);o.st[s][0]++;o.st[s][1]+=r[4]||0;}
+    if(WON.test(r[3])&&r[5]>=A&&r[5]<=B){o.w++;o.wv+=r[4]||0;}});return o;}
+function crsRender(){var el=document.getElementById("crs");if(!el)return;
+  var R=range(),A=iso(R.a),B=iso(R.b),T=iso(TODAY),P=crsCalc(A,B),H0=crsCalc(T,T);
+  function cell(lb,n,v,c,sub){return '<div class="crc" style="--c:'+c+'"><span class="t">'+lb+'</span><span class="v">'+n0(n)+'</span><span class="s">'+(v!=null?r0(v):'&nbsp;')+'</span>'+(sub?'<span class="s2">'+sub+'</span>':'')+'</div>';}
+  var tx=P.l?P.w/P.l:0;
+  var h='<div class="ch"><h3>Planilha de atendimento · resumo</h3><span class="h">'+fmtRange(R.a,R.b)+' · hoje: <b>'+n0(H0.l)+'</b> leads, <b>'+n0(H0.st[1][0])+'</b> propostas, <b>'+n0(H0.w)+'</b> vendas · <button type="button" class="link" data-go="h-crm">ver detalhes</button></span></div>'+
+    '<div class="crg">'+cell("Leads que entraram",P.l,null,"var(--blue)")+cell("Em atendimento",P.st[0][0],null,"var(--ink-3)")+cell("Proposta enviada",P.st[1][0],P.st[1][1],"var(--amber)","esperando resposta")+
+    cell("Negociando",P.st[2][0],P.st[2][1],"var(--teal)","negociação, pagamento, licitação")+cell("Vendas fechadas",P.w,P.wv,"var(--green)",pc(tx)+" dos leads")+cell("Perdidas",P.st[4][0],null,"var(--red)")+'</div>';
+  /* propostas abertas agora, por vendedora (toda a planilha) */
+  var V={},tot={p:0,pv:0,n:0,nv:0,old:0};CRM.rows.forEach(function(r){var s=crsStage(r[3]);if(s!==1&&s!==2)return;var k=nice(r[1]);var x=V[k]||(V[k]={p:0,pv:0,n:0,nv:0});
+    if(s===1){x.p++;x.pv+=r[4]||0;tot.p++;tot.pv+=r[4]||0;}else{x.n++;x.nv+=r[4]||0;tot.n++;tot.nv+=r[4]||0;}});
+  var ks=Object.keys(V).sort(function(a,b){return (V[b].pv+V[b].nv)-(V[a].pv+V[a].nv)});
+  h+='<div class="tw"><table class="sm"><thead><tr><th>Em aberto agora (planilha toda)</th><th>Propostas</th><th>Valor</th><th>Negociando</th><th>Valor</th></tr></thead><tbody>'+
+    ks.map(function(k){var x=V[k];return '<tr><td>'+esc(k)+'</td><td>'+n0(x.p)+'</td><td>'+r0(x.pv)+'</td><td>'+n0(x.n)+'</td><td>'+r0(x.nv)+'</td></tr>';}).join("")+
+    '<tr class="tot"><td>Total</td><td>'+n0(tot.p)+'</td><td>'+r0(tot.pv)+'</td><td>'+n0(tot.n)+'</td><td>'+r0(tot.nv)+'</td></tr></tbody></table></div>'+
+    '<p class="qnote" style="padding:8px 18px 14px">Etapa = status atual de cada lead na planilha. Leads pela data de entrada; vendas pela data da venda. Valor = o que a vendedora anotou no lead.</p>';
+  el.innerHTML=h;}
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("#crs [data-go]");if(!b)return;var t=document.getElementById(b.getAttribute("data-go"));if(t)t.scrollIntoView({behavior:"smooth",block:"start"});});
+(function(){var _rc=renderCRM;renderCRM=function(){_rc.apply(this,arguments);try{crsRender();}catch(e){console.error("crs",e)}};})();
+/* meta do mês no lugar do cartão de meta único */
+(function(){var _m=mc4Render;mc4Render=function(){_m.apply(this,arguments);try{var m=iso(range().b).slice(0,7),has=MC4CH.some(function(c){return +METAS[m+"|"+c[2]]>0;});
+  var g=document.getElementById("vgGoal");if(g){g.hidden=has;g.parentNode.style.gridTemplateColumns=has?"1fr":"";}}catch(e){}};})();
 
 /* ---------- ROAS ---------- */
 var ROASINV="gm",ROASWPP="p";try{ROASINV=localStorage.getItem("mc-roasinv")||"gm";ROASWPP=localStorage.getItem("mc-roaswpp")||"p"}catch(e){}
@@ -1883,7 +1932,7 @@ var SKEL=__SKEL__;
 var ART=null,PUBLAST=SNAPAT||0,PUBBUSY=false,CRMLIVE=false;
 function nowTxt(){var d=new Date();return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" às "+String(d.getHours()).padStart(2,"0")+"h"+String(d.getMinutes()).padStart(2,"0");}
 function J(x){return JSON.stringify(x).replace(/<\//g,"<\\/");}
-function pubReady(){return !!(ART&&((MCP&&okG&&okM&&CRMLIVE&&BL.st==="ok")||window.__forcePub));}
+function pubReady(){return !!(ART&&((MCP&&(okG||okM)&&BL.st==="ok")||window.__forcePub));}
 function buildDoc(){
   var MK="%%END"+"SCRIPT%%",ES="</scr"+"ipt",tpl=document.getElementById("tplsrc").textContent.split(MK).join(ES);
   var h=JSON.parse(JSON.stringify(H));h.asOf=nowTxt();
@@ -1898,7 +1947,8 @@ function pubChip(){var b=document.getElementById("pubBtn");if(!b)return;b.hidden
 function publishSnap(manual){if(PUBBUSY||!ART)return;if(!pubReady()){if(manual){document.getElementById("pubTxt").textContent="Esperando todos os dados carregarem…";}return;}
   PUBBUSY=true;pubChip();var html;try{html=buildDoc();}catch(e){PUBBUSY=false;document.getElementById("pubTxt").textContent="Não deu para montar a foto";return;}
   ART.publish(html).then(function(){PUBLAST=Date.now();PUBBUSY=false;pubChip();}).catch(function(e){PUBBUSY=false;var c=e&&e.code;document.getElementById("pubTxt").textContent=c==="conflict"?"Outra versão foi salva; recarregando":(c==="not_writer"||c==="not_granted")?"Sem permissão para salvar o link":"Não salvou; tente de novo";});}
-var _autoT=null;function autoPub(){clearTimeout(_autoT);_autoT=setTimeout(function(){if(pubReady()&&Date.now()-PUBLAST>20*60000)publishSnap(false);},45000);}
+var _autoT=null;function autoPub(){clearTimeout(_autoT);_autoT=setTimeout(function(){if(pubReady()&&Date.now()-PUBLAST>8*60000)publishSnap(false);},15000);}
+setInterval(function(){autoPub();},5*60000);
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"&&pubReady()&&Date.now()-PUBLAST>5*60000)publishSnap(false);});
 if(window.claude&&typeof window.claude.use==="function")window.claude.use("artifact").then(function(a){if(a){ART=a;pubChip();}}).catch(function(){});
 document.getElementById("pubBtn").addEventListener("click",function(){publishSnap(true);});
@@ -2003,7 +2053,8 @@ if(window.claude&&typeof window.claude.use==="function"){
     mcp.callTool(GS,GT,{customer_id:CID,query:GQ.st},{cache:{staleTime:120000,gcTime:1800000}}).catch(function(e){fail("o Google Ads",e)})
     .then(function(){return mcp.callTool(MS,MT,MQ.sets,{cache:{staleTime:120000,gcTime:1800000}}).catch(function(e){fail("a Meta Ads",e)});})
     .then(function(){watch(mcp);blKick();});
-    mcp.watchTool("Google Drive","read_file_content",{fileId:FID},crmLive,{cache:{staleTime:120000,gcTime:1800000},refetchInterval:600000});
+    mcp.watchTool("Google Drive","read_file_content",{fileId:FID},crmLive,{cache:{staleTime:120000,gcTime:1800000},refetchInterval:300000});
+    setInterval(function(){if(MCP&&BL.st!=="loading"){Promise.resolve(MCP.invalidate(BS)).catch(function(){}).then(function(){blKick();});}},5*60000);
   }).catch(function(){});
 }
 
@@ -2053,7 +2104,10 @@ if(window.claude&&typeof window.claude.use==="function"){
     var ch='<div class="c chs"><span class="l">Por canal '+(isToday?"hoje":br(idx(D)))+'</span>'+cks.map(function(c){var x=hd.ch[c]||{n:0,v:0};return '<div class="cr"><span>'+CHS[c]+'<small>'+n0(x.n)+' ped.</small></span><span>'+r0(x.v)+'</span>'+bar(x.v/cmx*100,CHC[c])+'</div>';}).join("")+'</div>';
     var L=(hd.list.length>=3?hd.list:mo.list).slice().sort(function(a,b){return a[0]<b[0]?1:-1}).slice(0,4);
     var ls='<div class="c last"><span class="l">Últimas vendas</span>'+L.map(function(x){return '<div class="lr"><i style="background:'+CHC[x[2]]+'"></i><span>'+br(idx(x[1]))+' · '+CHS[x[2]]+(VDN[x[3]]?' · '+esc(VDN[x[3]]):'')+'</span><b>'+r0(x[4])+'</b></div>';}).join("")+'</div>';
-    root.innerHTML=h+k+(typeof mc4tv==="function"?mc4tv():"")+'<div class="tvg">'+vs+cs+ch+ls+'</div><a class="tvexit" href="#">sair do modo TV</a>';
+    var kp=k.split('<div class="c'),hero='<div class="c'+kp[1],mesC='<div class="c'+kp[2],goalC=kp[3]?('<div class="c'+kp[3]).replace(/<\/div>$/,""):"",m4=typeof mc4tv==="function"?mc4tv(true):"";
+    root.innerHTML=h+'<div class="tvband">'+(isToday?"Hoje":"Dia "+br(idx(D)))+'</div><div class="tvrow3">'+hero+ch+cs+'</div>'+
+      '<div class="tvband">Mês de '+MESES[dt.getMonth()]+'/'+dt.getFullYear()+' · até '+br(idx(D))+'</div><div class="tvrow5">'+mesC+(m4||goalC)+'</div>'+
+      '<div class="tvrow2">'+vs+ls+'</div><a class="tvexit" href="#">sair do modo TV</a>';
   }
   function sync(){var t=on();document.documentElement.classList.toggle("tvmode",t);root.hidden=!t;if(t){tvRender();try{document.title="TV · Medical Company"}catch(e){}}}
   window.addEventListener("hashchange",sync);
@@ -2838,7 +2892,7 @@ function mc4Tone(p,exp){return p>=exp?"var(--green)":p>=exp*0.75?"var(--amber)":
 function mc4Render(){var el=document.getElementById("mc4");if(!el)return;
   var m=iso(range().b).slice(0,7),d=mc4Data(m),mn=MESES[+m.slice(5,7)-1],exp=d.dd/d.dim,left=Math.max(1,d.dim-d.dd+(d.cur?1:0));
   var any=MC4CH.some(function(c){return d.ch[c[2]].meta>0;});
-  var h='<div class="ch"><h3>Meta de '+mn+' por canal</h3><span class="h">pelo Bling · '+(d.base==="v"?"sem frete":"com frete")+(d.cur?' · dia '+d.dd+' de '+d.dim+' ('+Math.round(exp*100)+'% do mês)':'')+'</span></div>';
+  var h='<div class="ch"><h3>Meta do mês · '+mn+'/'+m.slice(0,4)+'</h3><span class="h">mês inteiro, não muda com o período escolhido · pelo Bling · '+(d.base==="v"?"sem frete":"com frete")+(d.cur?' · dia '+d.dd+' de '+d.dim+' ('+Math.round(exp*100)+'% do mês)':'')+'</span></div>';
   if(!d.has&&!d.tot.v){el.innerHTML=h+'<p class="qnote" style="padding:0 18px 14px">Carregando pedidos do mês…</p>'+mc4Form(m,d);return;}
   if(!any){el.innerHTML=h+'<p class="qnote" style="padding:0 18px 14px">Nenhuma meta por canal definida para '+mn+'.</p>'+mc4Form(m,d);return;}
   function row(nm,x,cls){var p=x.meta?x.v/x.meta:0,f=Math.max(0,x.meta-x.v),proj=d.dd?x.v/d.dd*d.dim:x.v,tone=mc4Tone(p,exp);
@@ -2853,14 +2907,43 @@ function mc4Render(){var el=document.getElementById("mc4");if(!el)return;
 }
 function mc4Form(m,d){if(!DB)return '<p class="qnote" style="padding:6px 18px 14px">Para mudar as metas, abra o painel no Claude com sua conta.</p>';
   return '<form id="mc4F" class="mc4f">'+MC4CH.map(function(c){var v=d.ch[c[2]].meta;return '<label>'+c[1]+' (R$)<input name="'+c[2]+'" inputmode="decimal" value="'+(v?String(v).replace(".",","):"")+'"></label>';}).join("")+'<button type="submit">Salvar metas de '+MESES[+m.slice(5,7)-1]+'</button>'+(METAERR?'<span class="qnote">'+esc(METAERR)+'</span>':'')+'</form>';}
-function mc4tv(){try{var m=iso(TODAY).slice(0,7),d=mc4Data(m);if(!MC4CH.some(function(c){return d.ch[c[2]].meta>0;}))return "";var exp=d.dd/d.dim;
-  return '<div class="tvm4">'+MC4CH.concat([["","Total","tot","#E2E8F0"]]).map(function(c){var x=c[2]==="tot"?d.tot:d.ch[c[2]],p=x.meta?x.v/x.meta:0;
-    return '<div class="c"><span class="l">Meta '+c[1]+'</span><span class="v">'+Math.round(p*100)+'<small>%</small></span>'+'<div class="tvbar"><i style="width:'+Math.min(100,p*100).toFixed(1)+'%;background:'+(p>=exp?"#34D399":p>=exp*0.75?"#FBBF24":"#F87171")+'"></i></div>'+'<span class="s">'+r0(x.v)+' de '+r0(x.meta)+'</span></div>';}).join("")+'</div>';}catch(e){return "";}}
+function mc4tv(bare){try{var m=iso(TODAY).slice(0,7),d=mc4Data(m);if(!MC4CH.some(function(c){return d.ch[c[2]].meta>0;}))return "";var exp=d.dd/d.dim;
+  return (bare?'':'<div class="tvm4">')+MC4CH.concat([["","Total","tot","#E2E8F0"]]).map(function(c){var x=c[2]==="tot"?d.tot:d.ch[c[2]],p=x.meta?x.v/x.meta:0;
+    return '<div class="c"><span class="l">Meta '+(c[2]==="ml"?"ML":c[1])+'</span><span class="v">'+Math.round(p*100)+'<small>%</small></span>'+'<div class="tvbar"><i style="width:'+Math.min(100,p*100).toFixed(1)+'%;background:'+(p>=exp?"#34D399":p>=exp*0.75?"#FBBF24":"#F87171")+'"></i></div>'+'<span class="s">'+r0(x.v)+' de '+r0(x.meta)+'</span></div>';}).join("")+(bare?'':'</div>');}catch(e){return "";}}
 document.addEventListener("submit",function(e){if(!e.target||e.target.id!=="mc4F")return;e.preventDefault();if(!DB)return;
   var m=iso(range().b).slice(0,7),u={},tot=0;MC4CH.forEach(function(c){var raw=(e.target.elements[c[2]].value||"").replace(/\./g,"").replace(",",".");var v=Math.round((parseFloat(raw)||0)*100)/100;u[m+"|"+c[2]]=v;tot+=v;});
   u[m]=Math.round(tot*100)/100;METAERR="Salvando…";mc4Render();
   DB.doc("config/metas").set(Object.assign({},METAS,u)).then(function(){METAERR="";renderVG();}).catch(function(err){METAERR=(err&&err.code==="permission_denied")?"Você não tem permissão para mudar a meta.":"Não salvou, tente de novo.";mc4Render();});});
 (function(){var _rv=renderVG;renderVG=function(){_rv.apply(this,arguments);try{mc4Render();}catch(e){console.error("mc4",e)}};})();
+
+
+/* ---------- resumo da planilha de atendimento ---------- */
+var CRS_ST=[["Em atendimento",/ATENDIMENTO|SONDAGEM|ATEND\.|SEM STATUS|NOVO LEAD/],["Proposta enviada",/PROPOSTA/],["Negociando",/NEGOCIA|FOLLOW|AGUARDANDO|LICITA/]];
+function crsStage(st){if(WON.test(st))return 3;if(LOST.test(st))return 4;for(var i=0;i<CRS_ST.length;i++)if(CRS_ST[i][1].test(st))return i;return 0;}
+function crsCalc(A,B){var o={l:0,st:[[0,0],[0,0],[0,0],[0,0],[0,0]],w:0,wv:0};
+  CRM.rows.forEach(function(r){if(r[0]>=A&&r[0]<=B){o.l++;var s=crsStage(r[3]);o.st[s][0]++;o.st[s][1]+=r[4]||0;}
+    if(WON.test(r[3])&&r[5]>=A&&r[5]<=B){o.w++;o.wv+=r[4]||0;}});return o;}
+function crsRender(){var el=document.getElementById("crs");if(!el)return;
+  var R=range(),A=iso(R.a),B=iso(R.b),T=iso(TODAY),P=crsCalc(A,B),H0=crsCalc(T,T);
+  function cell(lb,n,v,c,sub){return '<div class="crc" style="--c:'+c+'"><span class="t">'+lb+'</span><span class="v">'+n0(n)+'</span><span class="s">'+(v!=null?r0(v):'&nbsp;')+'</span>'+(sub?'<span class="s2">'+sub+'</span>':'')+'</div>';}
+  var tx=P.l?P.w/P.l:0;
+  var h='<div class="ch"><h3>Planilha de atendimento · resumo</h3><span class="h">'+fmtRange(R.a,R.b)+' · hoje: <b>'+n0(H0.l)+'</b> leads, <b>'+n0(H0.st[1][0])+'</b> propostas, <b>'+n0(H0.w)+'</b> vendas · <button type="button" class="link" data-go="h-crm">ver detalhes</button></span></div>'+
+    '<div class="crg">'+cell("Leads que entraram",P.l,null,"var(--blue)")+cell("Em atendimento",P.st[0][0],null,"var(--ink-3)")+cell("Proposta enviada",P.st[1][0],P.st[1][1],"var(--amber)","esperando resposta")+
+    cell("Negociando",P.st[2][0],P.st[2][1],"var(--teal)","negociação, pagamento, licitação")+cell("Vendas fechadas",P.w,P.wv,"var(--green)",pc(tx)+" dos leads")+cell("Perdidas",P.st[4][0],null,"var(--red)")+'</div>';
+  /* propostas abertas agora, por vendedora (toda a planilha) */
+  var V={},tot={p:0,pv:0,n:0,nv:0,old:0};CRM.rows.forEach(function(r){var s=crsStage(r[3]);if(s!==1&&s!==2)return;var k=nice(r[1]);var x=V[k]||(V[k]={p:0,pv:0,n:0,nv:0});
+    if(s===1){x.p++;x.pv+=r[4]||0;tot.p++;tot.pv+=r[4]||0;}else{x.n++;x.nv+=r[4]||0;tot.n++;tot.nv+=r[4]||0;}});
+  var ks=Object.keys(V).sort(function(a,b){return (V[b].pv+V[b].nv)-(V[a].pv+V[a].nv)});
+  h+='<div class="tw"><table class="sm"><thead><tr><th>Em aberto agora (planilha toda)</th><th>Propostas</th><th>Valor</th><th>Negociando</th><th>Valor</th></tr></thead><tbody>'+
+    ks.map(function(k){var x=V[k];return '<tr><td>'+esc(k)+'</td><td>'+n0(x.p)+'</td><td>'+r0(x.pv)+'</td><td>'+n0(x.n)+'</td><td>'+r0(x.nv)+'</td></tr>';}).join("")+
+    '<tr class="tot"><td>Total</td><td>'+n0(tot.p)+'</td><td>'+r0(tot.pv)+'</td><td>'+n0(tot.n)+'</td><td>'+r0(tot.nv)+'</td></tr></tbody></table></div>'+
+    '<p class="qnote" style="padding:8px 18px 14px">Etapa = status atual de cada lead na planilha. Leads pela data de entrada; vendas pela data da venda. Valor = o que a vendedora anotou no lead.</p>';
+  el.innerHTML=h;}
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("#crs [data-go]");if(!b)return;var t=document.getElementById(b.getAttribute("data-go"));if(t)t.scrollIntoView({behavior:"smooth",block:"start"});});
+(function(){var _rc=renderCRM;renderCRM=function(){_rc.apply(this,arguments);try{crsRender();}catch(e){console.error("crs",e)}};})();
+/* meta do mês no lugar do cartão de meta único */
+(function(){var _m=mc4Render;mc4Render=function(){_m.apply(this,arguments);try{var m=iso(range().b).slice(0,7),has=MC4CH.some(function(c){return +METAS[m+"|"+c[2]]>0;});
+  var g=document.getElementById("vgGoal");if(g){g.hidden=has;g.parentNode.style.gridTemplateColumns=has?"1fr":"";}}catch(e){}};})();
 
 /* ---------- ROAS ---------- */
 var ROASINV="gm",ROASWPP="p";try{ROASINV=localStorage.getItem("mc-roasinv")||"gm";ROASWPP=localStorage.getItem("mc-roaswpp")||"p"}catch(e){}
@@ -2901,7 +2984,7 @@ var SKEL="<!doctype html><html><head><meta charset=utf8><meta name=viewport cont
 var ART=null,PUBLAST=SNAPAT||0,PUBBUSY=false,CRMLIVE=false;
 function nowTxt(){var d=new Date();return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" às "+String(d.getHours()).padStart(2,"0")+"h"+String(d.getMinutes()).padStart(2,"0");}
 function J(x){return JSON.stringify(x).replace(/<\//g,"<\\/");}
-function pubReady(){return !!(ART&&((MCP&&okG&&okM&&CRMLIVE&&BL.st==="ok")||window.__forcePub));}
+function pubReady(){return !!(ART&&((MCP&&(okG||okM)&&BL.st==="ok")||window.__forcePub));}
 function buildDoc(){
   var MK="%%END"+"SCRIPT%%",ES="</scr"+"ipt",tpl=document.getElementById("tplsrc").textContent.split(MK).join(ES);
   var h=JSON.parse(JSON.stringify(H));h.asOf=nowTxt();
@@ -2916,7 +2999,8 @@ function pubChip(){var b=document.getElementById("pubBtn");if(!b)return;b.hidden
 function publishSnap(manual){if(PUBBUSY||!ART)return;if(!pubReady()){if(manual){document.getElementById("pubTxt").textContent="Esperando todos os dados carregarem…";}return;}
   PUBBUSY=true;pubChip();var html;try{html=buildDoc();}catch(e){PUBBUSY=false;document.getElementById("pubTxt").textContent="Não deu para montar a foto";return;}
   ART.publish(html).then(function(){PUBLAST=Date.now();PUBBUSY=false;pubChip();}).catch(function(e){PUBBUSY=false;var c=e&&e.code;document.getElementById("pubTxt").textContent=c==="conflict"?"Outra versão foi salva; recarregando":(c==="not_writer"||c==="not_granted")?"Sem permissão para salvar o link":"Não salvou; tente de novo";});}
-var _autoT=null;function autoPub(){clearTimeout(_autoT);_autoT=setTimeout(function(){if(pubReady()&&Date.now()-PUBLAST>20*60000)publishSnap(false);},45000);}
+var _autoT=null;function autoPub(){clearTimeout(_autoT);_autoT=setTimeout(function(){if(pubReady()&&Date.now()-PUBLAST>8*60000)publishSnap(false);},15000);}
+setInterval(function(){autoPub();},5*60000);
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden"&&pubReady()&&Date.now()-PUBLAST>5*60000)publishSnap(false);});
 if(window.claude&&typeof window.claude.use==="function")window.claude.use("artifact").then(function(a){if(a){ART=a;pubChip();}}).catch(function(){});
 document.getElementById("pubBtn").addEventListener("click",function(){publishSnap(true);});
@@ -3021,7 +3105,8 @@ if(window.claude&&typeof window.claude.use==="function"){
     mcp.callTool(GS,GT,{customer_id:CID,query:GQ.st},{cache:{staleTime:120000,gcTime:1800000}}).catch(function(e){fail("o Google Ads",e)})
     .then(function(){return mcp.callTool(MS,MT,MQ.sets,{cache:{staleTime:120000,gcTime:1800000}}).catch(function(e){fail("a Meta Ads",e)});})
     .then(function(){watch(mcp);blKick();});
-    mcp.watchTool("Google Drive","read_file_content",{fileId:FID},crmLive,{cache:{staleTime:120000,gcTime:1800000},refetchInterval:600000});
+    mcp.watchTool("Google Drive","read_file_content",{fileId:FID},crmLive,{cache:{staleTime:120000,gcTime:1800000},refetchInterval:300000});
+    setInterval(function(){if(MCP&&BL.st!=="loading"){Promise.resolve(MCP.invalidate(BS)).catch(function(){}).then(function(){blKick();});}},5*60000);
   }).catch(function(){});
 }
 
@@ -3071,7 +3156,10 @@ if(window.claude&&typeof window.claude.use==="function"){
     var ch='<div class="c chs"><span class="l">Por canal '+(isToday?"hoje":br(idx(D)))+'</span>'+cks.map(function(c){var x=hd.ch[c]||{n:0,v:0};return '<div class="cr"><span>'+CHS[c]+'<small>'+n0(x.n)+' ped.</small></span><span>'+r0(x.v)+'</span>'+bar(x.v/cmx*100,CHC[c])+'</div>';}).join("")+'</div>';
     var L=(hd.list.length>=3?hd.list:mo.list).slice().sort(function(a,b){return a[0]<b[0]?1:-1}).slice(0,4);
     var ls='<div class="c last"><span class="l">Últimas vendas</span>'+L.map(function(x){return '<div class="lr"><i style="background:'+CHC[x[2]]+'"></i><span>'+br(idx(x[1]))+' · '+CHS[x[2]]+(VDN[x[3]]?' · '+esc(VDN[x[3]]):'')+'</span><b>'+r0(x[4])+'</b></div>';}).join("")+'</div>';
-    root.innerHTML=h+k+(typeof mc4tv==="function"?mc4tv():"")+'<div class="tvg">'+vs+cs+ch+ls+'</div><a class="tvexit" href="#">sair do modo TV</a>';
+    var kp=k.split('<div class="c'),hero='<div class="c'+kp[1],mesC='<div class="c'+kp[2],goalC=kp[3]?('<div class="c'+kp[3]).replace(/<\/div>$/,""):"",m4=typeof mc4tv==="function"?mc4tv(true):"";
+    root.innerHTML=h+'<div class="tvband">'+(isToday?"Hoje":"Dia "+br(idx(D)))+'</div><div class="tvrow3">'+hero+ch+cs+'</div>'+
+      '<div class="tvband">Mês de '+MESES[dt.getMonth()]+'/'+dt.getFullYear()+' · até '+br(idx(D))+'</div><div class="tvrow5">'+mesC+(m4||goalC)+'</div>'+
+      '<div class="tvrow2">'+vs+ls+'</div><a class="tvexit" href="#">sair do modo TV</a>';
   }
   function sync(){var t=on();document.documentElement.classList.toggle("tvmode",t);root.hidden=!t;if(t){tvRender();try{document.title="TV · Medical Company"}catch(e){}}}
   window.addEventListener("hashchange",sync);
